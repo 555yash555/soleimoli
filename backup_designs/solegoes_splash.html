@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoleGoes - Splash Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="solegoes_theme.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg,
+                oklch(0.72 0.20 345) 0%,
+                oklch(0.68 0.22 35) 50%,
+                oklch(0.70 0.19 55) 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            animation: logoEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+                filter: blur(0);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .glow-effect {
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px oklch(1.0 0 0 / 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px oklch(1.0 0 0 / 0.8));
+            }
+        }
+
+        .tagline {
+            animation: taglineFloat 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes taglineFloat {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+                letter-spacing: 0.15em;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+                letter-spacing: -0.01em;
+            }
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 3rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            animation: dotPulse 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        .dot:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 4px 20px oklch(0 0 0 / 0.3);
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 20px 60px oklch(0 0 0 / 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col items-center justify-center min-h-screen px-6">
+        <div class="logo-container text-center">
+            <div class="logo-icon mx-auto glow-effect">
+                🌍
+            </div>
+            <h1 class="logo-text">SoleGoes</h1>
+        </div>
+
+        <p class="tagline text-white text-xl font-light mt-6 tracking-wide">
+            Solo but not alone
+        </p>
+
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect to onboarding after 3 seconds
+        setTimeout(() => {
+            // window.location.href = 'solegoes_onboarding.html';
+            console.log('Redirecting to onboarding...');
+        }, 3000);
+    </script>
+</body>
+</html>

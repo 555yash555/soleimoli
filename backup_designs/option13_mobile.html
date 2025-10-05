@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SoleGoes - Map Explorer (Mobile)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Map Container */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .map-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="2" fill="white" opacity="0.3"/><circle cx="60" cy="50" r="2" fill="white" opacity="0.3"/><circle cx="40" cy="70" r="2" fill="white" opacity="0.3"/><circle cx="80" cy="40" r="2" fill="white" opacity="0.3"/></svg>');
+            background-size: 200px;
+            opacity: 0.3;
+        }
+
+        /* Floating Search Bar */
+        .search-bar {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            z-index: 100;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 0.875rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+
+        .filter-icon {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Map Markers */
+        .marker {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .marker:hover {
+            transform: scale(1.1);
+        }
+
+        .marker::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+        }
+
+        .marker-icon {
+            font-size: 1.25rem;
+        }
+
+        .marker-1 {
+            top: 25%;
+            left: 30%;
+        }
+
+        .marker-2 {
+            top: 40%;
+            left: 65%;
+        }
+
+        .marker-3 {
+            top: 60%;
+            left: 25%;
+        }
+
+        .marker-4 {
+            top: 55%;
+            left: 70%;
+        }
+
+        /* Bottom Sheet */
+        .bottom-sheet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
+            max-height: 50vh;
+            overflow: hidden;
+            z-index: 50;
+        }
+
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin: 0.75rem auto;
+        }
+
+        .sheet-content {
+            padding: 0 1rem 1rem;
+            overflow-y: auto;
+            max-height: calc(50vh - 60px);
+        }
+
+        .sheet-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .trip-list-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 16px;
+            margin-bottom: 0.75rem;
+        }
+
+        .trip-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .trip-info {
+            flex: 1;
+        }
+
+        .trip-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #1a202c;
+        }
+
+        .trip-meta {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+
+        .trip-price {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: absolute;
+            bottom: calc(50vh + 1rem);
+            right: 1rem;
+            width: 56px;
+            height: 56px;
+            background: #667eea;
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 60;
+        }
+
+        .location-button {
+            position: absolute;
+            top: 5rem;
+            right: 1rem;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <div class="map-bg"></div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <i data-lucide="search" style="width: 20px; height: 20px; color: #718096;"></i>
+            <input type="text" placeholder="Search destinations...">
+            <div class="filter-icon">
+                <i data-lucide="sliders-horizontal" style="width: 20px; height: 20px;"></i>
+            </div>
+        </div>
+
+        <!-- Location Button -->
+        <button class="location-button">
+            <i data-lucide="navigation" style="width: 20px; height: 20px; color: #667eea;"></i>
+        </button>
+
+        <!-- Map Markers -->
+        <div class="marker marker-1">
+            <span class="marker-icon">🏖️</span>
+        </div>
+        <div class="marker marker-2">
+            <span class="marker-icon">🏔️</span>
+        </div>
+        <div class="marker marker-3">
+            <span class="marker-icon">🌴</span>
+        </div>
+        <div class="marker marker-4">
+            <span class="marker-icon">🎉</span>
+        </div>
+
+        <!-- FAB -->
+        <button class="fab">
+            <i data-lucide="plus" style="width: 28px; height: 28px;"></i>
+        </button>
+
+        <!-- Bottom Sheet -->
+        <div class="bottom-sheet">
+            <div class="sheet-handle"></div>
+            <div class="sheet-content">
+                <h2 class="sheet-title">Nearby Trips</h2>
+
+                <div class="trip-list-item">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=200&q=80" alt="Bali" class="trip-thumbnail">
+                    <div class="trip-info">
+                        <div class="trip-name">Bali Beach Escape</div>
+                        <div class="trip-meta">5 Days • 8/12 joined</div>
+                        <div class="trip-price">₹15,000</div>
+                    </div>
+                </div>
+
+                <div class="trip-list-item">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&q=80" alt="Ladakh" class="trip-thumbnail">
+                    <div class="trip-info">
+                        <div class="trip-name">Ladakh Adventure</div>
+                        <div class="trip-meta">6 Days • 5/10 joined</div>
+                        <div class="trip-price">₹18,000</div>
+                    </div>
+                </div>
+
+                <div class="trip-list-item">
+                    <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=200&q=80" alt="Goa" class="trip-thumbnail">
+                    <div class="trip-info">
+                        <div class="trip-name">Goa Party Weekend</div>
+                        <div class="trip-meta">4 Days • 12/15 joined</div>
+                        <div class="trip-price">₹12,000</div>
+                    </div>
+                </div>
+
+                <div class="trip-list-item">
+                    <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?w=200&q=80" alt="Manali" class="trip-thumbnail">
+                    <div class="trip-info">
+                        <div class="trip-name">Manali Snow Trek</div>
+                        <div class="trip-meta">5 Days • 6/12 joined</div>
+                        <div class="trip-price">₹16,500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Marker click simulation
+        document.querySelectorAll('.marker').forEach(marker => {
+            marker.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

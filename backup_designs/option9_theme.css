@@ -1,0 +1,94 @@
+/* Option 9: Playful Illustration Theme */
+/* Inspired by: Duolingo, Headspace, Figma, friendly apps */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Playful color palette */
+  --background: #fef7cd;
+  --foreground: #2d3436;
+  --card: #ffffff;
+  --card-foreground: #2d3436;
+
+  /* Coral primary */
+  --primary: #ff6b6b;
+  --primary-foreground: #ffffff;
+
+  /* Sky blue secondary */
+  --secondary: #5ec4ff;
+  --secondary-foreground: #ffffff;
+
+  /* Sunny yellow accent */
+  --accent: #ffd93d;
+  --accent-foreground: #2d3436;
+
+  /* Purple tertiary */
+  --tertiary: #a29bfe;
+  --tertiary-foreground: #ffffff;
+
+  /* Fonts */
+  --font-sans: 'Nunito', sans-serif;
+  --font-display: 'Fredoka', sans-serif;
+
+  /* Radius */
+  --radius: 1.25rem;
+}
+
+/* Playful Button */
+.playful-btn {
+  background: var(--primary);
+  color: white;
+  border: 3px solid var(--foreground);
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  border-radius: 25px;
+  box-shadow: 0 6px 0 rgba(45, 52, 54, 0.2);
+  transition: all 0.2s ease;
+  transform: rotate(-1deg);
+}
+
+.playful-btn:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.playful-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(45, 52, 54, 0.2);
+}
+
+/* Illustration Card */
+.illustration-card {
+  background: white;
+  border: 4px solid var(--foreground);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 8px 0 rgba(45, 52, 54, 0.1);
+  transform: rotate(1deg);
+  transition: all 0.3s ease;
+}
+
+.illustration-card:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Wobble Animation */
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.wobble {
+  animation: wobble 3s ease-in-out infinite;
+}

@@ -1,0 +1,74 @@
+/* Option 7: Organic/Nature Inspired Theme */
+
+:root {
+  /* Earthy, warm tones */
+  --background: #faf8f5;
+  --foreground: #3d3428;
+  --card: #faf8f5;
+  --card-foreground: #3d3428;
+  --popover: #faf8f5;
+  --popover-foreground: #3d3428;
+
+  /* Terracotta primary */
+  --primary: #d4654f;
+  --primary-foreground: #ffffff;
+
+  /* Sage green secondary */
+  --secondary: #8ba888;
+  --secondary-foreground: #ffffff;
+
+  /* Mustard yellow accent */
+  --accent: #e0a85b;
+  --accent-foreground: #3d3428;
+
+  --muted: #f0ede8;
+  --muted-foreground: #6b5f52;
+  --destructive: #c44536;
+  --destructive-foreground: #ffffff;
+  --border: #e6dfd6;
+  --input: #f0ede8;
+  --ring: #d4654f;
+
+  /* Chart colors - earthy palette */
+  --chart-1: #d4654f;
+  --chart-2: #8ba888;
+  --chart-3: #e0a85b;
+  --chart-4: #9b7e6b;
+  --chart-5: #7a9b8a;
+
+  /* Sidebar */
+  --sidebar: #faf8f5;
+  --sidebar-foreground: #3d3428;
+  --sidebar-primary: #d4654f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e0a85b;
+  --sidebar-accent-foreground: #3d3428;
+  --sidebar-border: #e6dfd6;
+  --sidebar-ring: #d4654f;
+
+  /* Fonts */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-serif: 'Merriweather', serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Organic styling */
+  --radius: 2rem;
+
+  /* Soft, organic shadows */
+  --shadow-2xs: 0 2px 8px rgba(61, 52, 40, 0.06);
+  --shadow-xs: 0 2px 8px rgba(61, 52, 40, 0.08);
+  --shadow-sm: 0 3px 12px rgba(61, 52, 40, 0.1);
+  --shadow: 0 4px 16px rgba(61, 52, 40, 0.12);
+  --shadow-md: 0 6px 20px rgba(61, 52, 40, 0.14);
+  --shadow-lg: 0 8px 24px rgba(61, 52, 40, 0.16);
+  --shadow-xl: 0 12px 32px rgba(61, 52, 40, 0.18);
+  --shadow-2xl: 0 16px 40px rgba(61, 52, 40, 0.2);
+
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}

@@ -1,0 +1,282 @@
+/* Option 6: Retro 80s Synthwave Theme */
+/* Inspired by: Miami Vice, Outrun, Synthwave aesthetics */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Synthwave color palette */
+  --background: #0a0e27;
+  --foreground: #00ffff;
+  --card: rgba(255, 0, 128, 0.1);
+  --card-foreground: #00ffff;
+
+  /* Hot pink primary */
+  --primary: #ff0080;
+  --primary-foreground: #ffffff;
+
+  /* Cyan secondary */
+  --secondary: #00ffff;
+  --secondary-foreground: #000000;
+
+  /* Purple accent */
+  --accent: #ff00ff;
+  --accent-foreground: #ffffff;
+
+  /* Fonts */
+  --font-sans: 'Rajdhani', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+
+  /* Radius */
+  --radius: 1rem;
+}
+
+/* Neon Glow Effect */
+.neon-glow {
+  text-shadow: 0 0 10px currentColor,
+               0 0 20px currentColor,
+               0 0 30px currentColor;
+}
+
+.neon-border {
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 20px var(--primary),
+              inset 0 0 20px rgba(255, 0, 128, 0.2);
+}
+
+/* Retro Grid */
+.retro-grid {
+  background: 
+    linear-gradient(90deg, transparent 48%, rgba(255, 0, 128, 0.3) 50%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(255, 0, 128, 0.3) 50%, transparent 52%);
+  background-size: 50px 50px;
+}
+
+/* Scanline Effect */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 3px
+  );
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Neon Text */
+.neon-text {
+  color: var(--primary);
+  text-shadow: 
+    0 0 7px var(--primary),
+    0 0 10px var(--primary),
+    0 0 21px var(--primary);
+  animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 7px var(--primary),
+      0 0 10px var(--primary),
+      0 0 21px var(--primary);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+/* Neon Border */
+.neon-border {
+  border: 2px solid var(--primary);
+  box-shadow: 
+    0 0 5px var(--primary),
+    inset 0 0 5px var(--primary),
+    0 0 10px var(--accent);
+}
+
+/* Neon Button */
+.neon-btn {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 
+    0 0 10px var(--primary),
+    inset 0 0 10px rgba(255, 0, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.neon-btn:hover {
+  box-shadow: 
+    0 0 20px var(--primary),
+    inset 0 0 20px rgba(255, 0, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.neon-btn:hover::before {
+  opacity: 0.2;
+}
+
+/* Grid Floor Effect */
+.grid-floor {
+  background: 
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px),
+    linear-gradient(var(--accent) 1px, transparent 1px);
+  background-size: 50px 50px;
+  position: relative;
+}
+
+.grid-floor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--background) 100%
+  );
+}
+
+/* Scanline Effect */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 0, 255, 0.03) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(255, 0, 255, 0.03) 3px
+  );
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+}
+
+/* Chrome Text Effect */
+.chrome-text {
+  background: linear-gradient(
+    180deg,
+    var(--primary),
+    var(--accent),
+    var(--quaternary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px var(--primary));
+}
+
+/* Synthwave Card */
+.synth-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 255, 0.2),
+    inset 0 0 20px rgba(0, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.synth-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    var(--primary),
+    var(--accent),
+    var(--quaternary),
+    var(--primary)
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.synth-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* VHS Glitch Effect */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
+}
+
+/* Sunset Gradient */
+.sunset-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--quaternary) 0%,
+    var(--primary) 50%,
+    var(--secondary) 100%
+  );
+}
+
+/* Neon Glow */
+.glow-pink {
+  box-shadow: 0 0 20px var(--primary);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.glow-yellow {
+  box-shadow: 0 0 20px var(--tertiary);
+}

@@ -1,0 +1,74 @@
+/* Option 10: Comic/Pop Art Style Theme */
+
+:root {
+  /* Bright comic book colors */
+  --background: #fff9e6;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+
+  /* Primary red */
+  --primary: #ff3333;
+  --primary-foreground: #ffffff;
+
+  /* Yellow secondary */
+  --secondary: #ffdd00;
+  --secondary-foreground: #000000;
+
+  /* Blue accent */
+  --accent: #0099ff;
+  --accent-foreground: #ffffff;
+
+  --muted: #fff9e6;
+  --muted-foreground: #666666;
+  --destructive: #ff3333;
+  --destructive-foreground: #ffffff;
+  --border: #000000;
+  --input: #ffffff;
+  --ring: #ff3333;
+
+  /* Chart colors - primary colors */
+  --chart-1: #ff3333;
+  --chart-2: #ffdd00;
+  --chart-3: #0099ff;
+  --chart-4: #33cc33;
+  --chart-5: #ff66cc;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #ff3333;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #0099ff;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #000000;
+  --sidebar-ring: #ff3333;
+
+  /* Fonts */
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Bangers', cursive;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Comic styling */
+  --radius: 0.5rem;
+
+  /* Comic book shadows */
+  --shadow-2xs: 3px 3px 0px #000000;
+  --shadow-xs: 4px 4px 0px #000000;
+  --shadow-sm: 5px 5px 0px #000000;
+  --shadow: 6px 6px 0px #000000;
+  --shadow-md: 8px 8px 0px #000000;
+  --shadow-lg: 10px 10px 0px #000000;
+  --shadow-xl: 12px 12px 0px #000000;
+  --shadow-2xl: 16px 16px 0px #000000;
+
+  --tracking-normal: 0.02em;
+  --spacing: 0.25rem;
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+}

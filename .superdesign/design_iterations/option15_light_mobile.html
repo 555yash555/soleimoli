@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SoleGoes - Light Minimal (Mobile)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: #fafafa;
+            font-family: 'Manrope', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding: 0.75rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:active {
+            background: rgba(0,0,0,0.08);
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.625rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 2px solid #ffffff;
+        }
+
+        .avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.6875rem;
+            color: white;
+        }
+
+        /* Search */
+        .search {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 0.625rem 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .search:focus-within {
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
+        }
+
+        .search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #1a1a1a;
+        }
+
+        .search input::placeholder {
+            color: rgba(0,0,0,0.35);
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 10px;
+            padding: 0.625rem;
+            min-width: 42px;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:active {
+            background: rgba(0,0,0,0.04);
+        }
+
+        /* Featured */
+        .featured {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .img-wrap {
+            position: relative;
+            height: 160px;
+        }
+
+        .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 0.625rem;
+            left: 0.625rem;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.06);
+            color: #1a1a1a;
+            border-radius: 100px;
+            padding: 0.3125rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.6875rem;
+        }
+
+        .like-btn {
+            position: absolute;
+            top: 0.625rem;
+            right: 0.625rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+        }
+
+        .like-btn.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+
+        .card-body {
+            padding: 0.875rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.625rem;
+            line-height: 1.3;
+        }
+
+        .meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.625rem;
+        }
+
+        .meta-tag {
+            background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 6px;
+            padding: 0.25rem 0.625rem;
+            font-weight: 500;
+            font-size: 0.6875rem;
+            color: rgba(0,0,0,0.7);
+        }
+
+        .stats {
+            display: flex;
+            gap: 0.875rem;
+            padding-top: 0.625rem;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            font-weight: 500;
+            font-size: 0.6875rem;
+            color: rgba(0,0,0,0.5);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3125rem;
+        }
+
+        /* Spin */
+        .spin {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
+            margin: 0.875rem 1rem;
+            padding: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .spin h3 {
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 0.1875rem;
+        }
+
+        .spin p {
+            color: rgba(0,0,0,0.5);
+            font-size: 0.6875rem;
+            font-weight: 500;
+        }
+
+        .spin-icon {
+            font-size: 1.75rem;
+            opacity: 0.7;
+        }
+
+        /* Section */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            margin: 1.25rem 0 0.625rem;
+        }
+
+        .section-title {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .see-all {
+            color: rgba(0,0,0,0.5);
+            font-weight: 500;
+            font-size: 0.6875rem;
+            text-decoration: none;
+        }
+
+        /* Chips */
+        .chip {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 100px;
+            padding: 0.4375rem 0.875rem;
+            font-weight: 500;
+            font-size: 0.6875rem;
+            white-space: nowrap;
+            color: rgba(0,0,0,0.7);
+            transition: all 0.2s ease;
+        }
+
+        .chip.active {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Trip Cards */
+        .trip-card {
+            min-width: 180px;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .trip-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .trip-info {
+            padding: 0.75rem;
+        }
+
+        .trip-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.3125rem;
+            line-height: 1.3;
+        }
+
+        .trip-price {
+            color: rgba(0,0,0,0.5);
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        /* Scroll */
+        .scroll {
+            display: flex;
+            gap: 0.625rem;
+            overflow-x: auto;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding: 0.5rem 0.625rem;
+            display: flex;
+            justify-content: space-around;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.1875rem;
+            color: rgba(0,0,0,0.35);
+            font-size: 0.625rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #1a1a1a;
+        }
+
+        .nav-item.fab {
+            position: relative;
+            top: -25px;
+            width: 50px;
+            height: 50px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            color: white;
+            border: 3px solid #fafafa;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-item.fab i {
+            width: 24px !important;
+            height: 24px !important;
+        }
+
+        .content-wrap {
+            padding-bottom: 90px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrap">
+        <!-- Header -->
+        <header class="header">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <button class="icon-btn">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                    <div class="logo">SoleGoes</div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="icon-btn" onclick="window.location.href='option15_mobile.html'" title="Switch to Dark Mode">
+                        <i data-lucide="moon" class="w-5 h-5"></i>
+                    </button>
+                    <button class="icon-btn relative">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                        <span class="notif-badge">3</span>
+                    </button>
+                    <button class="icon-btn">
+                        <div class="avatar">S</div>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search -->
+        <div style="padding: 0.875rem 1rem;">
+            <div class="flex gap-0.5">
+                <div class="search flex-1">
+                    <i data-lucide="search" class="w-4 h-4" style="color: rgba(0,0,0,0.35);"></i>
+                    <input type="text" placeholder="Where to next?" />
+                </div>
+                <button class="filter-btn">
+                    <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Featured -->
+        <div class="featured" style="cursor: pointer;" data-href="option15_light_trip_detail.html">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80" alt="Bali" />
+                <div class="badge">✨ Featured</div>
+                <button class="like-btn">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Bali Beach Escape</div>
+                <div class="meta">
+                    <span class="meta-tag">₹15,000</span>
+                    <span class="meta-tag">5 Days</span>
+                    <span class="meta-tag">Bali, Indonesia</span>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+                        234
+                    </div>
+                    <div class="stat">
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                        8 of 12
+                    </div>
+                    <div class="stat">
+                        <i data-lucide="star" class="w-3.5 h-3.5"></i>
+                        4.9
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spin -->
+        <div class="spin">
+            <div>
+                <h3>🎲 Spin the Globe</h3>
+                <p>Discover random random destinations</p>
+            </div>
+            <div class="spin-icon">🌐</div>
+        </div>
+
+        <!-- Trending -->
+        <div class="section-header">
+            <div class="section-title">Trending Destinations</div>
+        </div>
+        <div class="scroll">
+            <div class="chip active">Thailand</div>
+            <div class="chip">Rishikesh</div>
+            <div class="chip">Goa</div>
+            <div class="chip">Ladakh</div>
+            <div class="chip">Manali</div>
+        </div>
+
+        <!-- Popular -->
+        <div class="section-header">
+            <div class="section-title">Popular Trips</div>
+            <a href="#" class="see-all">See all →</a>
+        </div>
+        <div class="scroll">
+            <div class="trip-card" style="cursor: pointer;" data-href="option15_light_trip_detail.html">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=80" alt="Ladakh" />
+                <div class="trip-info">
+                    <div class="trip-title">Ladakh Adventure</div>
+                    <div class="trip-price">₹18,000 • 6 Days</div>
+                </div>
+            </div>
+            <div class="trip-card" style="cursor: pointer;" data-href="option15_light_trip_detail.html">
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=300&q=80" alt="Goa" />
+                <div class="trip-info">
+                    <div class="trip-title">Goa Party Weekend</div>
+                    <div class="trip-price">₹12,000 • 4 Days</div>
+                </div>
+            </div>
+            <div class="trip-card" style="cursor: pointer;" data-href="option15_light_trip_detail.html">
+                <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?w=300&q=80" alt="Manali" />
+                <div class="trip-info">
+                    <div class="trip-title">Manali Snow Trek</div>
+                    <div class="trip-price">₹16,500 • 5 Days</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span>Trips</span>
+        </a>
+        <a href="#" class="nav-item fab">
+            <i data-lucide="plus"></i>
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="messages-square" class="w-5 h-5"></i>
+            <span>Community</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="user" class="w-5 h-5"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        // Like button
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+            });
+        });
+
+        // Handle data-href clicks
+        document.addEventListener('click', function(e) {
+            const clickedElement = e.target.closest('[data-href]');
+            if (clickedElement) {
+                const url = clickedElement.getAttribute('data-href');
+                const features = 'width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no';
+                window.open(url, '_blank', features);
+                return;
+            }
+
+            const link = e.target.closest('a');
+            if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
+                e.preventDefault();
+                const url = link.getAttribute('href');
+                const features = 'width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no';
+                window.open(url, '_blank', features);
+            }
+        });
+    </script>
+</body>
+</html>

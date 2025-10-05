@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SoleGoes - Comic Pop Art (Mobile)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="option10_theme.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Bangers&family=Space+Mono:wght@400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif !important;
+            background: #fff9e6 !important;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+            color: #000000 !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Comic style cards */
+        .comic-card {
+            background: #ffffff;
+            border: 4px solid #000000;
+            border-radius: 0.5rem;
+            box-shadow: 6px 6px 0px #000000;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .comic-card:active {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0px #000000;
+        }
+
+        /* Halftone dots effect */
+        .halftone-bg {
+            position: relative;
+        }
+
+        .halftone-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, #000000 1px, transparent 1px);
+            background-size: 6px 6px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .comic-btn {
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 0.5rem;
+            box-shadow: 4px 4px 0px #000000;
+            transition: all 0.15s ease;
+            font-weight: 700;
+        }
+
+        .comic-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000000;
+        }
+
+        .pow-btn {
+            background: #ff3333;
+            color: white;
+            border: 4px solid #000000;
+            box-shadow: 5px 5px 0px #000000;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pow-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px #000000;
+        }
+
+        .header {
+            background: #ffffff;
+            padding: 1rem;
+            border-bottom: 4px solid #000000;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: #ff3333;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000000;
+            transform: rotate(-2deg);
+        }
+
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            padding: 0.75rem 1rem 1rem;
+            border-top: 4px solid #000000;
+            z-index: 50;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            color: #666666;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #ff3333;
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-item.active .nav-icon {
+            background: #ffdd00;
+            border: 3px solid #000000;
+            box-shadow: 3px 3px 0px #000000;
+        }
+
+        .nav-icon i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .fab {
+            width: 56px;
+            height: 56px;
+            background: #ff3333;
+            border: 4px solid #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 6px 6px 0px #000000;
+            margin-top: -28px;
+        }
+
+        .fab i {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .search-bar {
+            margin: 1rem;
+        }
+
+        .search-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            box-shadow: 4px 4px 0px #000000;
+        }
+
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            color: #000000;
+        }
+
+        .search-input-wrap input {
+            border: none;
+            background: transparent;
+            outline: none;
+            flex: 1;
+            font-size: 0.9375rem;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .search-input-wrap input::placeholder {
+            color: #666666;
+        }
+
+        .featured {
+            margin: 0 1rem 1.25rem;
+        }
+
+        .featured-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 0.5rem 0.5rem 0 0;
+            filter: contrast(1.2) saturate(1.3);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background: #ffdd00;
+            padding: 0.4375rem 0.875rem;
+            font-size: 0.6875rem;
+            font-weight: 800;
+            color: #000000;
+            border: 3px solid #000000;
+            border-radius: 0.5rem;
+            text-transform: uppercase;
+            transform: rotate(-3deg);
+            box-shadow: 3px 3px 0px #000000;
+        }
+
+        .bookmark-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 0px #000000;
+        }
+
+        .bookmark-btn i {
+            width: 18px;
+            height: 18px;
+            color: #ff3333;
+        }
+
+        .featured-content {
+            padding: 0.875rem;
+            background: #ffffff;
+        }
+
+        .featured-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            color: #000000;
+            font-weight: 700;
+            flex-wrap: wrap;
+        }
+
+        .price {
+            background: #ff3333;
+            color: white;
+            padding: 0.25rem 0.625rem;
+            border: 2px solid #000000;
+            border-radius: 0.375rem;
+            font-weight: 800;
+        }
+
+        .featured-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.8125rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .stat i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 800;
+            color: #000000;
+            margin: 0 1rem 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .chip-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .chip-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            background: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            color: #000000;
+            white-space: nowrap;
+            border: 3px solid #000000;
+            box-shadow: 3px 3px 0px #000000;
+            transition: all 0.15s ease;
+            text-transform: uppercase;
+        }
+
+        .chip:active {
+            background: #0099ff;
+            color: white;
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #000000;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 1rem 0.75rem;
+        }
+
+        .section-header h2 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #000000;
+            text-transform: uppercase;
+        }
+
+        .see-all {
+            font-size: 0.8125rem;
+            color: #ff3333;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .trip-scroll {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding: 0 1rem 1.5rem;
+            scrollbar-width: none;
+        }
+
+        .trip-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .trip-card {
+            min-width: 180px;
+            background: #ffffff;
+            border: 4px solid #000000;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 5px 5px 0px #000000;
+        }
+
+        .trip-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            filter: contrast(1.2) saturate(1.3);
+            border-bottom: 3px solid #000000;
+        }
+
+        .trip-content {
+            padding: 0.75rem;
+        }
+
+        .trip-title {
+            font-size: 0.9375rem;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 0.375rem;
+            text-transform: uppercase;
+        }
+
+        .trip-meta {
+            font-size: 0.75rem;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ff3333;
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 800;
+            padding: 0.25rem 0.4375rem;
+            border: 2px solid #000000;
+            border-radius: 0.375rem;
+            box-shadow: 2px 2px 0px #000000;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: #0099ff;
+            border: 3px solid #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.875rem;
+            box-shadow: 3px 3px 0px #000000;
+        }
+
+        .content-wrap {
+            padding-bottom: 90px;
+        }
+
+        /* Comic word bubble effect */
+        .bubble {
+            position: relative;
+            background: white;
+            border: 3px solid #000000;
+            border-radius: 1rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20%;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #000000;
+        }
+
+        .bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: calc(20% + 2px);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrap">
+        <!-- Header -->
+        <header class="header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 0.625rem;">
+                    <button class="comic-btn" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="menu" style="width: 18px; height: 18px;"></i>
+                    </button>
+                    <div class="logo">SOLEGOES!</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.625rem;">
+                    <button class="comic-btn" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <i data-lucide="bell" style="width: 18px; height: 18px;"></i>
+                        <div class="notification-badge">3</div>
+                    </button>
+                    <div class="user-avatar">S</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search -->
+        <div class="search-bar">
+            <div class="search-input-wrap">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" placeholder="WHERE TO?">
+            </div>
+        </div>
+
+        <!-- Featured Trip -->
+        <div class="featured">
+            <div class="comic-card halftone-bg" style="position: relative; padding: 0; overflow: hidden; cursor: pointer;" onclick="window.location.href='option10_trip_detail.html'">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&h=300&fit=crop" alt="Bali" class="featured-img">
+                <div class="featured-badge">POW!</div>
+                <button class="bookmark-btn" onclick="event.stopPropagation(); alert('Bookmark feature coming soon!')">
+                    <i data-lucide="bookmark"></i>
+                </button>
+                <div class="featured-content">
+                    <div class="featured-title">BALI BEACH!</div>
+                    <div class="featured-meta">
+                        <span class="price">₹15,000</span>
+                        <span style="font-weight: 800;">5 DAYS</span>
+                        <span style="font-weight: 800;">📍 BALI</span>
+                    </div>
+                    <div class="featured-stats">
+                        <div class="stat">
+                            <i data-lucide="users"></i>
+                            <span>234</span>
+                        </div>
+                        <div class="stat">
+                            <i data-lucide="calendar"></i>
+                            <span>8/12</span>
+                        </div>
+                        <div class="stat">
+                            <i data-lucide="star" style="fill: #ffdd00; color: #ffdd00;"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trending Locations -->
+        <div class="section-title">📍 HOT!</div>
+        <div class="chip-scroll">
+            <div class="chip">THAILAND</div>
+            <div class="chip">RISHIKESH</div>
+            <div class="chip">GOA</div>
+            <div class="chip">LADAKH</div>
+            <div class="chip">MANALI</div>
+        </div>
+
+        <!-- Popular Trips -->
+        <div class="section-header">
+            <h2>POPULAR!</h2>
+            <a href="#" class="see-all">ALL →</a>
+        </div>
+        <div class="trip-scroll">
+            <div class="trip-card" style="cursor: pointer;" onclick="window.location.href='option10_trip_detail.html'">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop" alt="Ladakh" class="trip-img">
+                <div class="trip-content">
+                    <div class="trip-title">LADAKH!</div>
+                    <div class="trip-meta">₹18,000 • 6D</div>
+                </div>
+            </div>
+            <div class="trip-card" style="cursor: pointer;" onclick="window.location.href='option10_trip_detail.html'">
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=300&h=200&fit=crop" alt="Goa" class="trip-img">
+                <div class="trip-content">
+                    <div class="trip-title">GOA PARTY!</div>
+                    <div class="trip-meta">₹12,000 • 4D</div>
+                </div>
+            </div>
+            <div class="trip-card" style="cursor: pointer;" onclick="window.location.href='option10_trip_detail.html'">
+                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=300&h=200&fit=crop" alt="Manali" class="trip-img">
+                <div class="trip-content">
+                    <div class="trip-title">MANALI!</div>
+                    <div class="trip-meta">₹16,500 • 5D</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nav-bottom">
+        <div style="display: flex; align-items: flex-end; justify-content: space-around;">
+            <a href="#" class="nav-item active">
+                <div class="nav-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                <span>HOME</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">
+                    <i data-lucide="compass"></i>
+                </div>
+                <span>TRIPS</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="fab">
+                    <i data-lucide="plus"></i>
+                </div>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">
+                    <i data-lucide="message-circle"></i>
+                </div>
+                <span>CHAT</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon">
+                    <i data-lucide="user"></i>
+                </div>
+                <span>YOU</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

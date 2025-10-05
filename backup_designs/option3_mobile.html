@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>SoleGoes - Gradient Maximalism (Mobile Optimized)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="option3_theme.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;800&display=swap");
+
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html {
+        font-size: 14px;
+      }
+
+      body {
+        background: radial-gradient(
+            at 10% 20%,
+            oklch(0.68 0.28 340 / 0.12) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 90% 10%,
+            oklch(0.65 0.26 260 / 0.12) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 50% 80%,
+            oklch(0.75 0.2 180 / 0.12) 0px,
+            transparent 50%
+          ),
+          oklch(0.96 0.005 280);
+        font-family: "Inter", sans-serif;
+        color: oklch(0.18 0.02 280);
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Header */
+      .header {
+        background: oklch(0.99 0 0 / 0.85);
+        backdrop-filter: blur(16px) saturate(180%);
+        border-bottom: 1px solid oklch(0.9 0.005 280);
+        padding: 0.75rem 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: "Outfit", sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.65 0.26 260),
+          oklch(0.75 0.2 180)
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 5s linear infinite;
+      }
+
+      @keyframes gradientShift {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        background: white;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px oklch(0 0 0 / 0.04);
+        position: relative;
+      }
+
+      .icon-btn::before {
+        content: "";
+        position: absolute;
+        inset: -1.5px;
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.75 0.2 180)
+        );
+        border-radius: 11px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .icon-btn:active::before {
+        opacity: 1;
+      }
+
+      .notif-badge {
+        position: absolute;
+        top: -3px;
+        right: -3px;
+        width: 16px;
+        height: 16px;
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.72 0.26 25)
+        );
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 0.625rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.75 0.2 180)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: white;
+      }
+
+      /* Search */
+      .search {
+        background: white;
+        border: 1.5px solid oklch(0.92 0.005 280);
+        border-radius: 12px;
+        padding: 0.625rem 0.875rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 2px 8px oklch(0 0 0 / 0.03);
+        transition: all 0.3s ease;
+      }
+
+      .search:focus-within {
+        border-color: transparent;
+        background-image: linear-gradient(white, white),
+          linear-gradient(135deg, oklch(0.68 0.28 340), oklch(0.75 0.2 180));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        box-shadow: 0 4px 16px oklch(0.68 0.28 340 / 0.1);
+      }
+
+      .search input {
+        background: transparent;
+        border: none;
+        outline: none;
+        flex: 1;
+        font-weight: 500;
+        font-size: 0.875rem;
+      }
+
+      .search input::placeholder {
+        color: oklch(0.6 0.02 280);
+      }
+
+      .filter-btn {
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.72 0.26 25)
+        );
+        border: none;
+        border-radius: 12px;
+        padding: 0.625rem;
+        min-width: 42px;
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 3px 12px oklch(0.68 0.28 340 / 0.25);
+      }
+
+      /* Featured */
+      .featured {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        margin: 1rem;
+        box-shadow: 0 6px 24px oklch(0 0 0 / 0.06),
+          0 3px 12px oklch(0.68 0.28 340 / 0.08);
+        border: 1px solid oklch(0.94 0.005 280);
+      }
+
+      .img-wrap {
+        position: relative;
+        height: 160px;
+      }
+
+      .img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          transparent 0%,
+          oklch(0 0 0 / 0.2) 50%,
+          oklch(0 0 0 / 0.6) 100%
+        );
+      }
+
+      .badge {
+        position: absolute;
+        top: 0.625rem;
+        left: 0.625rem;
+        background: linear-gradient(
+          135deg,
+          oklch(0.8 0.22 140),
+          oklch(0.75 0.24 165)
+        );
+        padding: 0.3125rem 0.75rem;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.6875rem;
+        color: white;
+        box-shadow: 0 3px 12px oklch(0.8 0.22 140 / 0.3);
+      }
+
+      .like-btn {
+        position: absolute;
+        top: 0.625rem;
+        right: 0.625rem;
+        width: 40px;
+        height: 40px;
+        background: oklch(0.99 0 0 / 0.9);
+        backdrop-filter: blur(8px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 12px oklch(0 0 0 / 0.12);
+      }
+
+      .like-btn.active {
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.72 0.26 25)
+        );
+        color: white;
+      }
+
+      .card-body {
+        padding: 1rem;
+      }
+
+      .card-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 1.0625rem;
+        font-weight: 800;
+        margin-bottom: 0.625rem;
+        line-height: 1.3;
+        background: linear-gradient(
+          135deg,
+          oklch(0.2 0.02 280),
+          oklch(0.45 0.15 280)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .meta {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.75rem;
+      }
+
+      .meta-chip {
+        background: oklch(0.98 0.01 280);
+        border: 1px solid oklch(0.92 0.005 280);
+        border-radius: 7px;
+        padding: 0.3125rem 0.75rem;
+        font-weight: 600;
+        font-size: 0.6875rem;
+      }
+
+      .stats {
+        display: flex;
+        gap: 0.875rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid oklch(0.92 0.005 280);
+        font-weight: 600;
+        font-size: 0.6875rem;
+      }
+
+      .stat {
+        display: flex;
+        align-items: center;
+        gap: 0.3125rem;
+      }
+
+      /* Spin */
+      .spin {
+        background: white;
+        border: 1.5px solid oklch(0.92 0.005 280);
+        border-radius: 14px;
+        margin: 0.875rem 1rem;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 3px 12px oklch(0 0 0 / 0.04);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .spin::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          270deg,
+          oklch(0.68 0.28 340 / 0.06),
+          oklch(0.65 0.26 260 / 0.06),
+          oklch(0.75 0.2 180 / 0.06)
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .spin:active::before {
+        opacity: 1;
+      }
+
+      .spin > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .spin h3 {
+        font-weight: 800;
+        font-size: 0.875rem;
+        margin-bottom: 0.1875rem;
+      }
+
+      .spin p {
+        color: oklch(0.55 0.02 280);
+        font-size: 0.6875rem;
+        font-weight: 500;
+      }
+
+      .spin-icon {
+        font-size: 2rem;
+        animation: rotate3d 6s linear infinite;
+      }
+
+      @keyframes rotate3d {
+        from {
+          transform: rotateY(0deg);
+        }
+        to {
+          transform: rotateY(360deg);
+        }
+      }
+
+      /* Section */
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        margin: 1.25rem 0 0.625rem;
+      }
+
+      .section-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.65 0.26 260)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .see-all {
+        background: linear-gradient(
+          135deg,
+          oklch(0.75 0.2 180),
+          oklch(0.7 0.24 220)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+        font-size: 0.6875rem;
+        text-decoration: none;
+      }
+
+      /* Chips */
+      .chip {
+        background: white;
+        border: 1.5px solid oklch(0.92 0.005 280);
+        border-radius: 100px;
+        padding: 0.4375rem 0.875rem;
+        font-weight: 600;
+        font-size: 0.6875rem;
+        white-space: nowrap;
+        box-shadow: 0 2px 6px oklch(0 0 0 / 0.03);
+      }
+
+      .chip.active {
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.72 0.26 25)
+        );
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 3px 12px oklch(0.68 0.28 340 / 0.25);
+      }
+
+      /* Trip Cards */
+      .trip-card {
+        min-width: 190px;
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px oklch(0 0 0 / 0.04);
+        border: 1px solid oklch(0.94 0.005 280);
+      }
+
+      .trip-card img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
+
+      .trip-info {
+        padding: 0.875rem;
+      }
+
+      .trip-title {
+        font-weight: 700;
+        font-size: 0.875rem;
+        margin-bottom: 0.375rem;
+        line-height: 1.3;
+      }
+
+      .trip-price {
+        background: linear-gradient(
+          135deg,
+          oklch(0.65 0.26 260),
+          oklch(0.72 0.24 295)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        font-size: 0.8125rem;
+      }
+
+      /* Scroll */
+      .scroll {
+        display: flex;
+        gap: 0.625rem;
+        overflow-x: auto;
+        padding: 0 1rem 1rem;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: oklch(0.99 0 0 / 0.9);
+        backdrop-filter: blur(16px) saturate(180%);
+        border-top: 1px solid oklch(0.92 0.005 280);
+        padding: 0.5rem 0.625rem;
+        display: flex;
+        justify-content: space-around;
+        z-index: 100;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1875rem;
+        color: oklch(0.55 0.02 280);
+        font-size: 0.625rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .nav-item.active {
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.65 0.26 260)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-item.fab {
+        position: relative;
+        top: -26px;
+        width: 52px;
+        height: 52px;
+        background: linear-gradient(
+          135deg,
+          oklch(0.68 0.28 340),
+          oklch(0.72 0.26 25)
+        );
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 6px 24px oklch(0.68 0.28 340 / 0.3);
+        border: 3px solid oklch(0.96 0.005 280);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-item.fab i {
+        width: 26px !important;
+        height: 26px !important;
+      }
+
+      .content-wrap {
+        padding-bottom: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-wrap">
+    <!-- Header -->
+    <header class="header">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <button class="icon-btn">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+          <div class="logo">SoleGoes</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="icon-btn relative">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span class="notif-badge">3</span>
+          </button>
+          <button class="icon-btn">
+            <div class="avatar">S</div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <div style="padding: 0.875rem 1rem">
+      <div class="flex gap-0.5">
+        <div class="search flex-1">
+          <i
+            data-lucide="search"
+            class="w-4 h-4"
+            style="color: oklch(0.68 0.28 340)"
+          ></i>
+          <input type="text" placeholder="Where to next?" />
+        </div>
+        <button class="filter-btn">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Featured -->
+    <div
+      class="featured"
+      style="cursor: pointer"
+      onclick="window.location.href='option3_trip_detail.html'"
+    >
+      <div class="img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80"
+          alt="Bali"
+        />
+        <div class="img-overlay"></div>
+        <div class="badge">✨ Featured</div>
+        <button
+          class="like-btn"
+          onclick="event.stopPropagation(); alert('Bookmark feature coming soon!')"
+        >
+          <i data-lucide="heart" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Bali Beach Escape</div>
+        <div class="meta">
+          <span class="meta-chip">₹15,000</span>
+          <span class="meta-chip">5 Days</span>
+          <span class="meta-chip">Bali</span>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <i
+              data-lucide="heart"
+              class="w-3.5 h-3.5"
+              style="color: oklch(0.68 0.28 340)"
+            ></i>
+            234
+          </div>
+          <div class="stat">
+            <i
+              data-lucide="users"
+              class="w-3.5 h-3.5"
+              style="color: oklch(0.65 0.26 260)"
+            ></i>
+            8/12
+          </div>
+          <div class="stat">
+            <i
+              data-lucide="star"
+              class="w-3.5 h-3.5"
+              style="color: oklch(0.8 0.22 140)"
+            ></i>
+            4.9
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spin -->
+    <div class="spin">
+      <div>
+        <h3>🎯 Spin the Globe</h3>
+        <p>Discover random destinations</p>
+      </div>
+      <div class="spin-icon">🎲</div>
+    </div>
+
+    <!-- Trending -->
+    <div class="section-header">
+      <div class="section-title">📍 Trending</div>
+    </div>
+    <div class="scroll">
+      <div class="chip active">Thailand</div>
+      <div class="chip">Rishikesh</div>
+      <div class="chip">Goa</div>
+      <div class="chip">Ladakh</div>
+      <div class="chip">Manali</div>
+    </div>
+
+    <!-- Popular -->
+    <div class="section-header">
+      <div class="section-title">Popular Trips</div>
+      <a href="#" class="see-all">See all →</a>
+    </div>
+    <div class="scroll">
+      <div
+        class="trip-card"
+        style="cursor: pointer"
+        onclick="window.location.href='option3_trip_detail.html'"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=80"
+          alt="Ladakh"
+        />
+        <div class="trip-info">
+          <div class="trip-title">Ladakh Adventure</div>
+          <div class="trip-price">₹18,000 • 6 Days</div>
+        </div>
+      </div>
+      <div
+        class="trip-card"
+        style="cursor: pointer"
+        onclick="window.location.href='option3_trip_detail.html'"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=300&q=80"
+          alt="Goa"
+        />
+        <div class="trip-info">
+          <div class="trip-title">Goa Party Weekend</div>
+          <div class="trip-price">₹12,000 • 4 Days</div>
+        </div>
+      </div>
+      <div
+        class="trip-card"
+        style="cursor: pointer"
+        onclick="window.location.href='option3_trip_detail.html'"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1597074866923-dc0589150358?w=300&q=80"
+          alt="Manali"
+        />
+        <div class="trip-info">
+          <div class="trip-title">Manali Snow Trek</div>
+          <div class="trip-price">₹16,500 • 5 Days</div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item active">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i data-lucide="map" class="w-5 h-5"></i>
+        <span>Trips</span>
+      </a>
+      <a href="#" class="nav-item fab">
+        <i data-lucide="plus"></i>
+      </a>
+      <a href="#" class="nav-item">
+        <i data-lucide="messages-square" class="w-5 h-5"></i>
+        <span>Community</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span>Profile</span>
+      </a>
+    </nav>
+
+    <script>
+      lucide.createIcons();
+
+      document.querySelectorAll(".like-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          this.classList.toggle("active");
+        });
+      });
+
+      // Auto-resize window to mobile dimensions
+      if (window.outerWidth !== 416 || window.outerHeight !== 816) {
+        window.resizeTo(416, 816);
+      }
+
+      // Override all navigation to open in same-sized window
+      document.addEventListener("click", function (e) {
+        const link = e.target.closest("a");
+        if (
+          link &&
+          link.getAttribute("href") &&
+          link.getAttribute("href") !== "#" &&
+          !link.onclick
+        ) {
+          e.preventDefault();
+          const url = link.getAttribute("href");
+          const features =
+            "width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no";
+          window.open(url, "_blank", features);
+        }
+      });
+    </script>
+  </body>
+</html>

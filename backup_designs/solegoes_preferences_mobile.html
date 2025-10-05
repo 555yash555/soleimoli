@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SoleGoes - Travel Preferences</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="solegoes_theme.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: oklch(0.98 0.005 264);
+            margin: 0;
+            padding: 0;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.625rem 1rem;
+            border-radius: 10px;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            background: white;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 0.3125rem;
+        }
+
+        .chip.active {
+            background: linear-gradient(135deg, oklch(0.68 0.22 35), oklch(0.72 0.20 345));
+            color: white;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px oklch(0.68 0.22 35 / 0.3);
+        }
+
+        .chip:active {
+            transform: scale(0.95);
+        }
+
+        .slider-container {
+            padding: 1.5rem 0 1rem;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: oklch(0.90 0.01 264);
+            outline: none;
+            position: relative;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, oklch(0.68 0.22 35), oklch(0.72 0.20 345));
+            cursor: pointer;
+            box-shadow: 0 3px 10px oklch(0.68 0.22 35 / 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .slider::-webkit-slider-thumb:active {
+            transform: scale(1.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, oklch(0.68 0.22 35), oklch(0.72 0.20 345));
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 3px 10px oklch(0.68 0.22 35 / 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.4375rem;
+            color: oklch(0.52 0.02 264);
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        .slider-value {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: oklch(0.68 0.22 35);
+            margin-bottom: 0.875rem;
+        }
+
+        .radio-option {
+            background: white;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            margin-bottom: 0.625rem;
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-option:active {
+            transform: scale(0.98);
+        }
+
+        .radio-option.active {
+            border-color: oklch(0.68 0.22 35);
+            background: oklch(0.68 0.22 35 / 0.05);
+        }
+
+        .radio-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            position: relative;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .radio-option.active .radio-circle {
+            border-color: oklch(0.68 0.22 35);
+        }
+
+        .radio-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, oklch(0.68 0.22 35), oklch(0.72 0.20 345));
+            transition: transform 0.3s ease;
+        }
+
+        .radio-option.active .radio-circle::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .radio-label {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: oklch(0.15 0.02 264);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, oklch(0.68 0.22 35), oklch(0.72 0.20 345));
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 0 6px 16px oklch(0.68 0.22 35 / 0.3);
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: oklch(0.15 0.02 264);
+            margin: 1.5rem 0 0.875rem;
+        }
+
+        .heading {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: oklch(0.15 0.02 264);
+            margin-bottom: 0.375rem;
+            line-height: 1.2;
+        }
+
+        .subheading {
+            font-size: 0.9375rem;
+            color: oklch(0.45 0.02 264);
+        }
+
+        .skip-link {
+            color: oklch(0.52 0.02 264);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn {
+            color: oklch(0.52 0.02 264);
+            transition: all 0.2s ease;
+            padding: 0.5rem;
+        }
+
+        .back-btn i {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="p-4 flex justify-between items-center">
+            <button class="back-btn flex items-center gap-2" onclick="window.history.back()">
+                <i data-lucide="arrow-left"></i>
+            </button>
+            <button class="skip-link" onclick="skipPreferences()">
+                Skip →
+            </button>
+        </header>
+
+        <!-- Content -->
+        <div class="flex-1 px-5 py-3 pb-8">
+            <div class="max-w-md mx-auto w-full">
+                <div class="text-center mb-6">
+                    <h1 class="heading">
+                        What kind of trips excite you? 🎒
+                    </h1>
+                    <p class="subheading">
+                        Help us personalize your experience
+                    </p>
+                </div>
+
+                <!-- Trip Types -->
+                <div class="flex flex-wrap justify-center mb-5">
+                    <div class="chip" data-type="adventure" onclick="toggleChip(this)">
+                        ⛰️ Adventure
+                    </div>
+                    <div class="chip" data-type="beach" onclick="toggleChip(this)">
+                        🏖️ Beach
+                    </div>
+                    <div class="chip" data-type="mountains" onclick="toggleChip(this)">
+                        🏔️ Mountains
+                    </div>
+                    <div class="chip" data-type="party" onclick="toggleChip(this)">
+                        🎉 Party
+                    </div>
+                    <div class="chip" data-type="culture" onclick="toggleChip(this)">
+                        🏛️ Culture
+                    </div>
+                    <div class="chip" data-type="wildlife" onclick="toggleChip(this)">
+                        🦁 Wildlife
+                    </div>
+                    <div class="chip" data-type="spiritual" onclick="toggleChip(this)">
+                        🕉️ Spiritual
+                    </div>
+                    <div class="chip" data-type="trekking" onclick="toggleChip(this)">
+                        🥾 Trekking
+                    </div>
+                    <div class="chip" data-type="food" onclick="toggleChip(this)">
+                        🍜 Food
+                    </div>
+                </div>
+
+                <!-- Budget Slider -->
+                <div class="section-title">
+                    Budget per trip
+                </div>
+                <div class="slider-container">
+                    <div class="slider-value" id="budgetValue">
+                        ₹5,000 - ₹50,000
+                    </div>
+                    <input
+                        type="range"
+                        min="5000"
+                        max="100000"
+                        step="5000"
+                        value="50000"
+                        class="slider"
+                        id="budgetSlider"
+                        oninput="updateBudget(this.value)"
+                    />
+                    <div class="slider-labels">
+                        <span>₹5,000</span>
+                        <span>₹1,00,000</span>
+                    </div>
+                </div>
+
+                <!-- Travel Frequency -->
+                <div class="section-title">
+                    Travel frequency
+                </div>
+                <div>
+                    <div class="radio-option" data-freq="monthly" onclick="selectFrequency(this)">
+                        <div class="radio-circle"></div>
+                        <span class="radio-label">Once a month</span>
+                    </div>
+                    <div class="radio-option" data-freq="quarterly" onclick="selectFrequency(this)">
+                        <div class="radio-circle"></div>
+                        <span class="radio-label">Once every 3 months</span>
+                    </div>
+                    <div class="radio-option" data-freq="biannual" onclick="selectFrequency(this)">
+                        <div class="radio-circle"></div>
+                        <span class="radio-label">Once every 6 months</span>
+                    </div>
+                    <div class="radio-option active" data-freq="flexible" onclick="selectFrequency(this)">
+                        <div class="radio-circle"></div>
+                        <span class="radio-label">Whenever I can!</span>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <button class="btn-primary mx-auto block mt-6" onclick="startExploring()">
+                    Start Exploring
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const selectedTypes = new Set();
+        let selectedBudget = 50000;
+        let selectedFrequency = 'flexible';
+
+        function toggleChip(chip) {
+            const type = chip.dataset.type;
+            chip.classList.toggle('active');
+
+            if (selectedTypes.has(type)) {
+                selectedTypes.delete(type);
+            } else {
+                selectedTypes.add(type);
+            }
+        }
+
+        function updateBudget(value) {
+            selectedBudget = parseInt(value);
+            const minBudget = 5000;
+            document.getElementById('budgetValue').textContent =
+                `₹${minBudget.toLocaleString('en-IN')} - ₹${parseInt(value).toLocaleString('en-IN')}`;
+        }
+
+        function selectFrequency(option) {
+            document.querySelectorAll('.radio-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            option.classList.add('active');
+            selectedFrequency = option.dataset.freq;
+        }
+
+        function skipPreferences() {
+            window.location.href = 'option1_mobile.html';
+        }
+
+        function startExploring() {
+            const preferences = {
+                types: Array.from(selectedTypes),
+                budget: selectedBudget,
+                frequency: selectedFrequency
+            };
+
+            localStorage.setItem('userPreferences', JSON.stringify(preferences));
+
+            const btn = event.target;
+            btn.innerHTML = '<i data-lucide="check-circle" class="w-5 h-5 inline"></i> All Set!';
+            lucide.createIcons();
+
+            setTimeout(() => {
+                window.location.href = 'option1_mobile.html';
+            }, 800);
+        }
+    </script>
+</body>
+</html>

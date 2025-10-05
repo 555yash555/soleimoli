@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bali Beach Escape - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: oklch(0.99 0.01 85);
+            font-family: 'DM Sans', sans-serif;
+            color: oklch(0.15 0 0);
+            margin: 0;
+            padding: 0;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, oklch(0.15 0 0) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            border-bottom: 4px solid oklch(0.15 0 0);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            padding: 0.875rem 1rem;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: oklch(0.90 0.20 95);
+            border-bottom: 3px solid oklch(0.15 0 0);
+            box-shadow: 0 4px 0px oklch(0.15 0 0);
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 3px solid oklch(0.15 0 0);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 0px oklch(0.15 0 0);
+            cursor: pointer;
+        }
+
+        .icon-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px oklch(0.15 0 0);
+        }
+
+        /* Content */
+        .content {
+            background: oklch(0.99 0.01 85);
+            border-top: 4px solid oklch(0.15 0 0);
+            margin-top: -30px;
+            padding: 1.25rem 1rem 100px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .meta {
+            display: flex;
+            gap: 0.625rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .chip {
+            background: white;
+            border: 3px solid oklch(0.15 0 0);
+            border-radius: 6px;
+            padding: 0.5rem 0.875rem;
+            font-weight: 700;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            box-shadow: 3px 3px 0px oklch(0.15 0 0);
+        }
+
+        .chip.price {
+            background: oklch(0.75 0.25 45);
+            color: oklch(0.15 0 0);
+            font-weight: 900;
+            box-shadow: 4px 4px 0px oklch(0.15 0 0);
+        }
+
+        .section {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-title {
+            font-size: 1.0625rem;
+            font-weight: 900;
+            margin-bottom: 0.875rem;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: oklch(0.90 0.20 95);
+            transform: skewY(-1deg);
+        }
+
+        .brutal-card {
+            background: white;
+            border: 3px solid oklch(0.15 0 0);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 6px 6px 0px oklch(0.15 0 0);
+        }
+
+        /* Accordion */
+        .accordion-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .accordion-header {
+            background: white;
+            border: 3px solid oklch(0.15 0 0);
+            border-radius: 8px;
+            padding: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px oklch(0.15 0 0);
+            transition: all 0.2s ease;
+        }
+
+        .accordion-header:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px oklch(0.15 0 0);
+        }
+
+        .accordion-item.active .accordion-header {
+            background: oklch(0.90 0.20 95);
+            box-shadow: 5px 5px 0px oklch(0.15 0 0);
+        }
+
+        .accordion-header .title {
+            font-size: 0.875rem;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 0.875rem;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding: 0.875rem;
+        }
+
+        .accordion-content p {
+            margin: 0;
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid oklch(0.15 0 0);
+            box-shadow: 3px 3px 0px oklch(0.15 0 0);
+        }
+
+        /* Lists */
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .highlights-list li {
+            padding: 0.625rem 0;
+            border-bottom: 2px dashed oklch(0.15 0 0);
+            font-size: 0.8125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .highlights-list li:last-child {
+            border-bottom: none;
+        }
+
+        .highlights-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: oklch(0.85 0.25 130);
+            border: 2px solid oklch(0.15 0 0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 2px 2px 0px oklch(0.15 0 0);
+        }
+
+        /* Review */
+        .review {
+            background: oklch(0.97 0.01 85);
+            border: 2px solid oklch(0.15 0 0);
+            border-radius: 8px;
+            padding: 0.875rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 3px 3px 0px oklch(0.15 0 0);
+        }
+
+        .review-header {
+            display: flex;
+            gap: 0.625rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: oklch(0.60 0.25 235);
+            border: 2px solid oklch(0.15 0 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+            color: white;
+            box-shadow: 2px 2px 0px oklch(0.15 0 0);
+        }
+
+        .review-info .name {
+            font-weight: 900;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .review-info .date {
+            color: oklch(0.45 0 0);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .review-text {
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* CTA */
+        .cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 4px solid oklch(0.15 0 0);
+            padding: 0.875rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+            box-shadow: 0 -4px 0px oklch(0.15 0 0);
+        }
+
+        .price-info .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .price-info .amount {
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+
+        .book-btn {
+            background: oklch(0.68 0.28 340);
+            border: 3px solid oklch(0.15 0 0);
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 900;
+            font-size: 0.875rem;
+            color: white;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px oklch(0.15 0 0);
+        }
+
+        .book-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px oklch(0.15 0 0);
+        }
+
+        /* Participants */
+        .participants {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin-top: 0.625rem;
+        }
+
+        .participant-avatars {
+            display: flex;
+            margin-left: -8px;
+        }
+
+        .participant-avatars .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin-left: -10px;
+            box-shadow: 2px 2px 0px oklch(0.15 0 0);
+        }
+
+        .participant-avatars .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .participant-count {
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="flex items-center justify-between">
+            <button class="icon-btn" onclick="window.history.back()">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-center gap-2">
+                <button class="icon-btn">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                </button>
+                <button class="icon-btn">
+                    <i data-lucide="bookmark" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80" alt="Bali Beach" class="hero-img" id="heroImg" />
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="title">Bali Beach Escape</div>
+
+        <div class="meta">
+            <span class="chip price">₹15,000</span>
+            <span class="chip">5 DAYS</span>
+            <span class="chip">📍 BALI</span>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="section">
+            <div class="section-title" style="position: relative;">Daily Itinerary</div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 1: Arrival</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Arrive at Ngurah Rai International Airport. Transfer to hotel in Seminyak. Evening beach welcome party with sunset cocktails and meet fellow travelers.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 2: Ubud Tour</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Visit Tegalalang Rice Terraces, Sacred Monkey Forest Sanctuary, and Ubud Palace. Traditional Balinese lunch included. Evening free for shopping at Ubud Art Market.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 3: Water Sports</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Full day at Nusa Dua Beach. Try surfing, snorkeling, or parasailing. Beach BBQ lunch. Sunset watching at Uluwatu Temple with traditional Kecak dance performance.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 4: Island Hop</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Boat trip to Nusa Penida. Visit Kelingking Beach, Angel's Billabong, and Broken Beach. Snorkeling at Crystal Bay. Return to Bali for farewell dinner.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 5: Departure</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Free morning for relaxation or last-minute shopping. Check out from hotel and transfer to airport for departure with amazing memories.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="section">
+            <div class="section-title" style="position: relative;">Photo Gallery</div>
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=80" alt="Bali 1" />
+                <img src="https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?w=400&q=80" alt="Bali 2" />
+                <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=400&q=80" alt="Bali 3" />
+                <img src="https://images.unsplash.com/photo-1555400080-e0e5e577e05b?w=400&q=80" alt="Bali 4" />
+                <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&q=80" alt="Bali 5" />
+                <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&q=80" alt="Bali 6" />
+            </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="section">
+            <div class="section-title" style="position: relative;">Trip Highlights</div>
+            <div class="brutal-card">
+                <ul class="highlights-list">
+                    <li>4-star Beach Resort</li>
+                    <li>Daily Breakfast</li>
+                    <li>Professional Guide</li>
+                    <li>Airport Transfers</li>
+                    <li>All Entry Tickets</li>
+                    <li>Water Sports</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Included -->
+        <div class="section">
+            <div class="section-title" style="position: relative;">What's Included</div>
+            <div class="brutal-card">
+                <ul class="highlights-list">
+                    <li>4 Nights Stay</li>
+                    <li>Daily Breakfast</li>
+                    <li>All Transportation</li>
+                    <li>English Guide</li>
+                    <li>Entry Fees</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Participants -->
+        <div class="section">
+            <div class="section-title" style="position: relative;">Solo Travelers (8/12)</div>
+            <div class="brutal-card">
+                <div class="participants">
+                    <div class="participant-avatars">
+                        <img src="https://i.pravatar.cc/150?img=1" alt="User 1" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=2" alt="User 2" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=3" alt="User 3" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=4" alt="User 4" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=5" alt="User 5" class="avatar" />
+                    </div>
+                    <span class="participant-count">+3 MORE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="section">
+            <div class="section-title" style="position: relative;">Agency Reviews (4.9 ⭐)</div>
+
+            <div class="review">
+                <div class="review-header">
+                    <div class="review-avatar">A</div>
+                    <div class="review-info">
+                        <div class="name">Arjun Mehta</div>
+                        <div class="date">2 weeks ago • Verified</div>
+                    </div>
+                </div>
+                <div class="review-text">
+                    Amazing experience with TravelHub! The itinerary was well-planned, guide was knowledgeable, and I made great friends. Highly recommend for solo travelers!
+                </div>
+            </div>
+
+            <div class="review">
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-info">
+                        <div class="name">Priya Sharma</div>
+                        <div class="date">1 month ago • Verified</div>
+                    </div>
+                </div>
+                <div class="review-text">
+                    Best decision ever! The agency took care of everything. Safe, fun, and perfectly organized. Already booked my next trip with them!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Bar -->
+    <div class="cta-bar">
+        <div class="price-info">
+            <div class="label">Total</div>
+            <div class="amount">₹15,000</div>
+        </div>
+        <button class="book-btn" onclick="alert('Booking feature coming soon!')">
+            Book Now
+        </button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Parallax effect
+        let ticking = false;
+        const heroImg = document.getElementById('heroImg');
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    heroImg.style.transform = `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0005})`;
+
+                    if (scrollY > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Accordion
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+            });
+
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

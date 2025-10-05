@@ -1,0 +1,329 @@
+/* DESIGN OPTION 2: Neo-Brutalism Bold & Playful */
+/* Inspired by: Gumroad, Figma, Y2K aesthetics, bold borders, flat colors */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Bold Color Palette - High contrast */
+  --background: oklch(0.99 0.01 85);
+  --foreground: oklch(0.15 0 0);
+
+  /* Primary - Electric Yellow */
+  --primary: oklch(0.90 0.20 95);
+  --primary-foreground: oklch(0.15 0 0);
+
+  /* Secondary - Hot Pink */
+  --secondary: oklch(0.68 0.28 340);
+  --secondary-foreground: oklch(0.99 0 0);
+
+  /* Accent - Cyber Blue */
+  --accent: oklch(0.60 0.25 235);
+  --accent-foreground: oklch(0.99 0 0);
+
+  /* Tertiary - Lime Green */
+  --tertiary: oklch(0.85 0.25 130);
+  --tertiary-foreground: oklch(0.15 0 0);
+
+  /* Quaternary - Orange */
+  --quaternary: oklch(0.75 0.25 45);
+  --quaternary-foreground: oklch(0.15 0 0);
+
+  /* Muted */
+  --muted: oklch(0.94 0.01 85);
+  --muted-foreground: oklch(0.45 0 0);
+
+  /* Border - Always black, bold */
+  --border: oklch(0.15 0 0);
+  --border-width: 4px;
+
+  /* Shadows - Offset shadows, no blur */
+  --shadow-offset: 6px;
+  --shadow-sm: 3px 3px 0px var(--border);
+  --shadow: 6px 6px 0px var(--border);
+  --shadow-md: 8px 8px 0px var(--border);
+  --shadow-lg: 12px 12px 0px var(--border);
+  --shadow-xl: 16px 16px 0px var(--border);
+
+  /* Typography */
+  --font-sans: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-display: 'DM Sans', sans-serif;
+
+  /* Border Radius - Sharp or slightly rounded */
+  --radius: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Spacing - Generous */
+  --spacing: 0.5rem;
+}
+
+/* Brutalist Card */
+.brutal-card {
+  background: var(--background);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px var(--border);
+}
+
+.brutal-card:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0px var(--border);
+}
+
+/* Brutalist Button */
+.brutal-btn {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 2rem;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px var(--border);
+}
+
+.brutal-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0px var(--border);
+}
+
+/* Color Variants */
+.brutal-btn-pink {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.brutal-btn-blue {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.brutal-btn-lime {
+  background: var(--tertiary);
+  color: var(--tertiary-foreground);
+}
+
+.brutal-btn-orange {
+  background: var(--quaternary);
+  color: var(--quaternary-foreground);
+}
+
+/* Brutalist Input */
+.brutal-input {
+  background: var(--background);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.15s ease;
+}
+
+.brutal-input:focus {
+  outline: none;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--border);
+}
+
+/* Sticker Effect */
+.sticker {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-2deg);
+  animation: stickerFloat 3s ease-in-out infinite;
+}
+
+@keyframes stickerFloat {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-5px); }
+}
+
+/* Bold Heading */
+.brutal-heading {
+  font-weight: 900;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  text-transform: uppercase;
+}
+
+/* Underline Effect */
+.brutal-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.brutal-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--primary);
+  transform: skewY(-1deg);
+  z-index: -1;
+}
+
+/* Tag / Chip */
+.brutal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--background);
+  border: 3px solid var(--border);
+  border-radius: 100px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 3px 3px 0px var(--border);
+  transition: all 0.15s ease;
+}
+
+.brutal-tag:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--border);
+}
+
+.brutal-tag.active {
+  background: var(--primary);
+}
+
+/* Badge */
+.brutal-badge {
+  display: inline-block;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  border: 3px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.875rem;
+  font-weight: 900;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 3px 3px 0px var(--border);
+  transform: rotate(-2deg);
+}
+
+/* Grid Pattern Background */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+/* Dotted Pattern */
+.dot-pattern {
+  background-image: radial-gradient(circle, var(--border) 2px, transparent 2px);
+  background-size: 24px 24px;
+  opacity: 0.08;
+}
+
+/* Wavy Divider */
+.wavy-divider {
+  position: relative;
+  height: 8px;
+  background: var(--primary);
+  margin: 2rem 0;
+}
+
+.wavy-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border) 0px,
+    var(--border) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* Scribble Effect */
+.scribble {
+  position: relative;
+}
+
+.scribble::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 3px solid var(--secondary);
+  border-radius: var(--radius-lg);
+  transform: rotate(-1deg);
+  pointer-events: none;
+}
+
+/* Stamp Effect */
+.stamp {
+  border: 4px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: var(--background);
+  transform: rotate(-1deg);
+  box-shadow: inset 0 0 0 2px var(--background),
+              inset 0 0 0 6px var(--border);
+}
+
+/* Press Effect Animation */
+@keyframes press {
+  0%, 100% { transform: translate(0, 0); box-shadow: var(--shadow); }
+  50% { transform: translate(3px, 3px); box-shadow: 3px 3px 0px var(--border); }
+}
+
+.press-anim {
+  animation: press 0.3s ease;
+}
+
+/* Wiggle Animation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+.wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+/* Color Blocks */
+.color-block-yellow { background: var(--primary); border: var(--border-width) solid var(--border); }
+.color-block-pink { background: var(--secondary); border: var(--border-width) solid var(--border); }
+.color-block-blue { background: var(--accent); border: var(--border-width) solid var(--border); }
+.color-block-lime { background: var(--tertiary); border: var(--border-width) solid var(--border); }
+.color-block-orange { background: var(--quaternary); border: var(--border-width) solid var(--border); }
+
+/* Notification Dot */
+.notif-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--secondary);
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  box-shadow: 2px 2px 0px var(--border);
+}

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>SoleGoes - Neo-Brutalism (Mobile Optimized)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="option2_theme.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;900&display=swap");
+
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html {
+        font-size: 14px;
+      }
+
+      body {
+        background: oklch(0.99 0.01 85);
+        font-family: "DM Sans", sans-serif;
+        color: oklch(0.15 0 0);
+        margin: 0;
+        padding: 0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(
+          circle,
+          oklch(0.15 0 0) 1px,
+          transparent 1px
+        );
+        background-size: 20px 20px;
+        opacity: 0.05;
+        pointer-events: none;
+      }
+
+      /* Header */
+      .header {
+        background: oklch(0.9 0.2 95);
+        border-bottom: 3px solid oklch(0.15 0 0);
+        padding: 0.75rem 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 3px 0px oklch(0.15 0 0);
+      }
+
+      .logo {
+        font-size: 1rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: oklch(0.68 0.28 340);
+        transform: skewY(-1deg);
+      }
+
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        background: white;
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 2px 0px oklch(0.15 0 0);
+      }
+
+      .icon-btn:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0px oklch(0.15 0 0);
+      }
+
+      .notif-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 16px;
+        height: 16px;
+        background: oklch(0.68 0.28 340);
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 50%;
+        font-weight: 900;
+        font-size: 0.625rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 1px 1px 0px oklch(0.15 0 0);
+      }
+
+      /* Search */
+      .search {
+        background: white;
+        border: 3px solid oklch(0.15 0 0);
+        border-radius: 8px;
+        padding: 0.625rem 0.875rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 3px 3px 0px oklch(0.15 0 0);
+      }
+
+      .search input {
+        background: transparent;
+        border: none;
+        outline: none;
+        flex: 1;
+        font-weight: 700;
+        font-size: 0.875rem;
+      }
+
+      .search input::placeholder {
+        color: oklch(0.65 0 0);
+        font-weight: 500;
+      }
+
+      .filter-btn {
+        background: oklch(0.6 0.25 235);
+        border: 3px solid oklch(0.15 0 0);
+        border-radius: 8px;
+        padding: 0.625rem;
+        min-width: 42px;
+        color: white;
+        font-weight: 900;
+        box-shadow: 3px 3px 0px oklch(0.15 0 0);
+      }
+
+      .filter-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px oklch(0.15 0 0);
+      }
+
+      /* Featured */
+      .featured {
+        background: white;
+        border: 3px solid oklch(0.15 0 0);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 1rem;
+        box-shadow: 6px 6px 0px oklch(0.15 0 0);
+      }
+
+      .img-wrap {
+        position: relative;
+        height: 160px;
+        border-bottom: 3px solid oklch(0.15 0 0);
+      }
+
+      .img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .badge {
+        position: absolute;
+        top: 0.625rem;
+        left: 0.625rem;
+        background: oklch(0.68 0.28 340);
+        color: white;
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 6px;
+        padding: 0.3125rem 0.75rem;
+        font-weight: 900;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        box-shadow: 2px 2px 0px oklch(0.15 0 0);
+        transform: rotate(-2deg);
+      }
+
+      .like-btn {
+        position: absolute;
+        top: 0.625rem;
+        right: 0.625rem;
+        width: 36px;
+        height: 36px;
+        background: white;
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 2px 0px oklch(0.15 0 0);
+      }
+
+      .like-btn.active {
+        background: oklch(0.68 0.28 340);
+        color: white;
+      }
+
+      .card-body {
+        padding: 0.875rem;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+      }
+
+      .meta {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.625rem;
+      }
+
+      .meta-chip {
+        background: oklch(0.9 0.2 95);
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 5px;
+        padding: 0.25rem 0.625rem;
+        font-weight: 700;
+        font-size: 0.6875rem;
+        box-shadow: 1px 1px 0px oklch(0.15 0 0);
+      }
+
+      .stats {
+        display: flex;
+        gap: 0.875rem;
+        padding-top: 0.625rem;
+        border-top: 2px dashed oklch(0.15 0 0);
+        font-weight: 700;
+        font-size: 0.6875rem;
+      }
+
+      .stat {
+        display: flex;
+        align-items: center;
+        gap: 0.3125rem;
+      }
+
+      /* Spin */
+      .spin {
+        background: oklch(0.85 0.25 130);
+        border: 3px solid oklch(0.15 0 0);
+        border-radius: 10px;
+        margin: 0.875rem 1rem;
+        padding: 0.875rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 5px 5px 0px oklch(0.15 0 0);
+      }
+
+      .spin h3 {
+        font-weight: 900;
+        font-size: 0.875rem;
+        margin-bottom: 0.1875rem;
+        text-transform: uppercase;
+      }
+
+      .spin p {
+        font-weight: 700;
+        font-size: 0.6875rem;
+        opacity: 0.7;
+      }
+
+      .spin-icon {
+        font-size: 1.75rem;
+        transform: rotate(-5deg);
+      }
+
+      /* Section */
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        margin: 1.25rem 0 0.625rem;
+      }
+
+      .section-title {
+        font-size: 0.9375rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 50%;
+        height: 4px;
+        background: oklch(0.9 0.2 95);
+        transform: skewY(-1deg);
+      }
+
+      .see-all {
+        background: oklch(0.6 0.25 235);
+        color: white;
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 5px;
+        padding: 0.3125rem 0.75rem;
+        font-weight: 900;
+        font-size: 0.6875rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        box-shadow: 2px 2px 0px oklch(0.15 0 0);
+      }
+
+      /* Chips */
+      .chip {
+        background: white;
+        border: 2px solid oklch(0.15 0 0);
+        border-radius: 100px;
+        padding: 0.4375rem 0.875rem;
+        font-weight: 700;
+        font-size: 0.6875rem;
+        white-space: nowrap;
+        box-shadow: 2px 2px 0px oklch(0.15 0 0);
+      }
+
+      .chip.active {
+        background: oklch(0.75 0.25 45);
+        transform: rotate(-1deg);
+      }
+
+      /* Trip Cards */
+      .trip-card {
+        min-width: 180px;
+        background: white;
+        border: 3px solid oklch(0.15 0 0);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 5px 5px 0px oklch(0.15 0 0);
+      }
+
+      .trip-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-bottom: 3px solid oklch(0.15 0 0);
+      }
+
+      .trip-info {
+        padding: 0.75rem;
+      }
+
+      .trip-title {
+        font-weight: 900;
+        font-size: 0.875rem;
+        margin-bottom: 0.3125rem;
+        text-transform: uppercase;
+        line-height: 1.2;
+      }
+
+      .trip-price {
+        background: oklch(0.6 0.25 235);
+        color: white;
+        display: inline-block;
+        padding: 0.25rem 0.625rem;
+        border-radius: 5px;
+        font-weight: 900;
+        font-size: 0.6875rem;
+        border: 2px solid oklch(0.15 0 0);
+        box-shadow: 1px 1px 0px oklch(0.15 0 0);
+      }
+
+      /* Scroll */
+      .scroll {
+        display: flex;
+        gap: 0.625rem;
+        overflow-x: auto;
+        padding: 0 1rem 1rem;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 3px solid oklch(0.15 0 0);
+        padding: 0.5rem 0.625rem;
+        display: flex;
+        justify-content: space-around;
+        z-index: 100;
+        box-shadow: 0 -3px 0px oklch(0.15 0 0);
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1875rem;
+        color: oklch(0.45 0 0);
+        font-size: 0.625rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+
+      .nav-item.active {
+        color: oklch(0.15 0 0);
+      }
+
+      .nav-item.fab {
+        position: relative;
+        top: -26px;
+        width: 52px;
+        height: 52px;
+        background: oklch(0.68 0.28 340);
+        border: 3px solid oklch(0.15 0 0);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 3px 3px 0px oklch(0.15 0 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-item.fab i {
+        width: 24px !important;
+        height: 24px !important;
+      }
+
+      .content-wrap {
+        padding-bottom: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-wrap">
+      <!-- Header -->
+      <header class="header">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <button class="icon-btn">
+              <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            <div class="logo" style="position: relative">SoleGoes</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="icon-btn relative">
+              <i data-lucide="bell" class="w-5 h-5"></i>
+              <span class="notif-badge">3</span>
+            </button>
+            <button class="icon-btn" style="background: oklch(0.75 0.25 45)">
+              <span style="font-weight: 900; font-size: 1rem">S</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Search -->
+      <div style="padding: 0.875rem 1rem">
+        <div class="flex gap-0.5">
+          <div class="search flex-1">
+            <i data-lucide="search" class="w-4 h-4"></i>
+            <input type="text" placeholder="Where to next?" />
+          </div>
+          <button class="filter-btn">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Featured -->
+      <div
+        class="featured"
+        style="cursor: pointer"
+        data-href="option2_trip_detail.html"
+      >
+        <div class="img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80"
+            alt="Bali"
+          />
+          <div class="badge">✨ Featured</div>
+          <button class="like-btn">
+            <i data-lucide="heart" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Bali Beach Escape</div>
+          <div class="meta">
+            <span class="meta-chip">₹15,000</span>
+            <span class="meta-chip">5 Days</span>
+            <span class="meta-chip">📍 Bali</span>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+              234
+            </div>
+            <div class="stat">
+              <i data-lucide="users" class="w-3.5 h-3.5"></i>
+              8/12
+            </div>
+            <div class="stat">
+              <i data-lucide="star" class="w-3.5 h-3.5"></i>
+              4.9
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spin -->
+      <div class="spin">
+        <div>
+          <h3>🎯 Spin Globe</h3>
+          <p>Random destinations</p>
+        </div>
+        <div class="spin-icon">🎲</div>
+      </div>
+
+      <!-- Trending -->
+      <div class="section-header">
+        <div class="section-title">📍 Trending</div>
+      </div>
+      <div class="scroll">
+        <div class="chip active">Thailand</div>
+        <div class="chip">Rishikesh</div>
+        <div class="chip">Goa</div>
+        <div class="chip">Ladakh</div>
+        <div class="chip">Manali</div>
+      </div>
+
+      <!-- Popular -->
+      <div class="section-header">
+        <div class="section-title">Popular Trips</div>
+        <a href="#" class="see-all">See all →</a>
+      </div>
+      <div class="scroll">
+        <div
+          class="trip-card"
+          style="cursor: pointer"
+          data-href="option2_trip_detail.html"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=80"
+            alt="Ladakh"
+          />
+          <div class="trip-info">
+            <div class="trip-title">Ladakh</div>
+            <div class="trip-price">₹18K • 6D</div>
+          </div>
+        </div>
+        <div
+          class="trip-card"
+          style="cursor: pointer"
+          data-href="option2_trip_detail.html"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=300&q=80"
+            alt="Goa"
+          />
+          <div class="trip-info">
+            <div class="trip-title">Goa Party</div>
+            <div class="trip-price">₹12K • 4D</div>
+          </div>
+        </div>
+        <div
+          class="trip-card"
+          style="cursor: pointer"
+          data-href="option2_trip_detail.html"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1597074866923-dc0589150358?w=300&q=80"
+            alt="Manali"
+          />
+          <div class="trip-info">
+            <div class="trip-title">Manali</div>
+            <div class="trip-price">₹16.5K • 5D</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item active">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i data-lucide="map" class="w-5 h-5"></i>
+        <span>Trips</span>
+      </a>
+      <a href="#" class="nav-item fab">
+        <i data-lucide="plus"></i>
+      </a>
+      <a href="#" class="nav-item">
+        <i data-lucide="messages-square" class="w-5 h-5"></i>
+        <span>Chat</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span>Me</span>
+      </a>
+    </nav>
+
+    <script>
+      lucide.createIcons();
+
+      document.querySelectorAll(".like-btn").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          this.classList.toggle("active");
+        });
+      });
+
+      // Handle all clicks on elements with data-href
+      document.addEventListener("click", function (e) {
+        const clickedElement = e.target.closest("[data-href]");
+        if (clickedElement) {
+          const url = clickedElement.getAttribute("data-href");
+          const features =
+            "width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no";
+          window.open(url, "_blank", features);
+          return;
+        }
+
+        // Handle regular links
+        const link = e.target.closest("a");
+        if (
+          link &&
+          link.getAttribute("href") &&
+          link.getAttribute("href") !== "#"
+        ) {
+          e.preventDefault();
+          const url = link.getAttribute("href");
+          const features =
+            "width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no";
+          window.open(url, "_blank", features);
+        }
+      });
+    </script>
+  </body>
+</html>

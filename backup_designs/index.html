@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoleGoes - Design Options</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 3rem;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin: 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-color),
+          var(--accent-color-alt)
+        );
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-number {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--accent-color-alt)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .card h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem;
+        color: #1a202c;
+      }
+
+      .card p {
+        color: #718096;
+        margin: 0 0 1.5rem;
+        line-height: 1.6;
+      }
+
+      .card-links {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 0.875rem 1.5rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--accent-color-alt)
+        );
+        color: white;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        background: #f7fafc;
+        color: #4a5568;
+        border: 2px solid #e2e8f0;
+      }
+
+      .btn-secondary:hover {
+        background: #edf2f7;
+        border-color: #cbd5e0;
+      }
+
+      .footer {
+        text-align: center;
+        color: white;
+        margin-top: 3rem;
+        opacity: 0.8;
+      }
+
+      /* Option specific colors */
+      .option-1 {
+        --accent-color: #667eea;
+        --accent-color-alt: #764ba2;
+      }
+
+      .option-2 {
+        --accent-color: #f093fb;
+        --accent-color-alt: #f5576c;
+      }
+
+      .option-3 {
+        --accent-color: #4facfe;
+        --accent-color-alt: #00f2fe;
+      }
+
+      .option-4 {
+        --accent-color: #43e97b;
+        --accent-color-alt: #38f9d7;
+      }
+
+      .option-5 {
+        --accent-color: #fa709a;
+        --accent-color-alt: #fee140;
+      }
+
+      .option-6 {
+        --accent-color: #a8edea;
+        --accent-color-alt: #fed6e3;
+      }
+
+      .option-7 {
+        --accent-color: #ff9a56;
+        --accent-color-alt: #ff6a88;
+      }
+
+      .option-8 {
+        --accent-color: #30cfd0;
+        --accent-color-alt: #330867;
+      }
+
+      .option-9 {
+        --accent-color: #f8b500;
+        --accent-color-alt: #fceabb;
+      }
+
+      .option-10 {
+        --accent-color: #ff6b6b;
+        --accent-color-alt: #ee5a6f;
+      }
+
+      .option-11 {
+        --accent-color: #000000;
+        --accent-color-alt: #1a1a1a;
+      }
+
+      .option-12 {
+        --accent-color: #4ecdc4;
+        --accent-color-alt: #44a08d;
+      }
+
+      .option-13 {
+        --accent-color: #667eea;
+        --accent-color-alt: #764ba2;
+      }
+
+      .option-14 {
+        --accent-color: #1a202c;
+        --accent-color-alt: #2d3748;
+      }
+
+      .option-15 {
+        --accent-color: #6C5CE7;
+        --accent-color-alt: #FF6B9D;
+      }
+
+      .option-16 {
+        --accent-color: #667eea;
+        --accent-color-alt: #c3cfe2;
+      }
+
+      .option-17 {
+        --accent-color: #ff6b6b;
+        --accent-color-alt: #ee5a6f;
+      }
+
+      .option-18 {
+        --accent-color: #00ffff;
+        --accent-color-alt: #ff00ff;
+      }
+
+      .option-19 {
+        --accent-color: #ff6b35;
+        --accent-color-alt: #f7931e;
+      }
+
+      .option-20 {
+        --accent-color: #d4a5a5;
+        --accent-color-alt: #9e7676;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .card-links {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">        <div class="header">
+            <h1>🌍 SoleGoes Design Options</h1>
+            <p>Explore 20 unique design systems & layouts for the travel app</p>
+        </div>
+
+      <div class="grid">
+        <!-- Option 1 -->
+        <div class="card option-1">
+          <div class="card-number">1</div>
+          <h2>Glassmorphism Dark</h2>
+          <p>
+            Frosted glass with neon accents. Inspired by Apple iOS and cyberpunk
+            aesthetics with electric blue and magenta glows.
+          </p>
+          <div class="card-links">
+            <a href="option1_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option1_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 2 -->
+        <div class="card option-2">
+          <div class="card-number">2</div>
+          <h2>Neo-Brutalism</h2>
+          <p>
+            Bold borders, flat colors, and playful energy. Inspired by Gumroad
+            and Y2K aesthetics with thick black borders and vibrant hues.
+          </p>
+          <div class="card-links">
+            <a href="option2_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option2_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 3 -->
+        <div class="card option-3">
+          <div class="card-number">3</div>
+          <h2>Gradient Maximalism</h2>
+          <p>
+            Vibrant mesh gradients and saturated colors. Inspired by Instagram
+            and Spotify with rich overlays and animated gradients.
+          </p>
+          <div class="card-links">
+            <a href="option3_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option3_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 4 -->
+        <div class="card option-4">
+          <div class="card-number">4</div>
+          <h2>Minimal Monochrome</h2>
+          <p>
+            Clean black & white with strategic pops of color. Inspired by Apple,
+            Notion, and Swiss design with refined sophistication.
+          </p>
+          <div class="card-links">
+            <a href="option4_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option4_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 5 -->
+        <div class="card option-5">
+          <div class="card-number">5</div>
+          <h2>Minimalist Neumorphism</h2>
+          <p>
+            Soft shadows and pastel colors. Inspired by modern mobile apps with
+            lavender, mint, and peach on light gray backgrounds.
+          </p>
+          <div class="card-links">
+            <a href="option5_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option5_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 6 -->
+        <div class="card option-6">
+          <div class="card-number">6</div>
+          <h2>Retro 80s Synthwave</h2>
+          <p>
+            Neon pink and cyan with grid perspective, scanlines, and Outrun aesthetics. Miami Vice meets travel.
+          </p>
+          <div class="card-links">
+            <a href="option6_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option6_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 7 -->
+        <div class="card option-7">
+          <div class="card-number">7</div>
+          <h2>Organic Nature Inspired</h2>
+          <p>
+            Warm earthy tones with terracotta, sage green, and natural textures. Airbnb-inspired organic aesthetic.
+          </p>
+          <div class="card-links">
+            <a href="option7_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option7_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 8 -->
+        <div class="card option-8">
+          <div class="card-number">8</div>
+          <h2>High Contrast Monochrome</h2>
+          <p>
+            Pure black and white with electric lime accent. Bold, accessible, and striking visual hierarchy.
+          </p>
+          <div class="card-links">
+            <a href="option8_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option8_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 9 -->
+        <div class="card option-9">
+          <div class="card-number">9</div>
+          <h2>Clean Scandinavian</h2>
+          <p>
+            Minimalist Nordic design with cool grays, ice blue, maximum whitespace. Stripe/Linear inspired.
+          </p>
+          <div class="card-links">
+            <a href="option9_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option9_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 10 -->
+        <div class="card option-10">
+          <div class="card-number">10</div>
+          <h2>Comic Pop Art</h2>
+          <p>
+            Bright comic book colors with halftone dots, bold outlines, and playful speech bubble aesthetics.
+          </p>
+          <div class="card-links">
+            <a href="option10_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option10_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 11 -->
+        <div class="card option-11">
+          <div class="card-number">11</div>
+          <h2>Swipeable Card Stack</h2>
+          <p>
+            Tinder-style dark theme with swipeable full-screen cards, like/nope actions, and immersive experience.
+          </p>
+          <div class="card-links">
+            <a href="option11_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option11_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 12 -->
+        <div class="card option-12">
+          <div class="card-number">12</div>
+          <h2>Stories Vertical Scroll</h2>
+          <p>
+            Instagram Stories inspired layout with full-screen vertical scroll, progress bars, and immersive content.
+          </p>
+          <div class="card-links">
+            <a href="option12_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option12_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 13 -->
+        <div class="card option-13">
+          <div class="card-number">13</div>
+          <h2>Map Explorer Layout</h2>
+          <p>
+            Map-first design with markers, floating search, and bottom sheet. Perfect for location-based discovery.
+          </p>
+          <div class="card-links">
+            <a href="option13_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option13_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 14 -->
+        <div class="card option-14">
+          <div class="card-number">14</div>
+          <h2>Magazine Editorial</h2>
+          <p>
+            Editorial magazine layout with serif typography, hero stories, and article-style content presentation.
+          </p>
+          <div class="card-links">
+            <a href="option14_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option14_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 15 -->
+        <div class="card option-11">
+          <div class="card-number">15</div>
+          <h2>Dark Sleek Standard</h2>
+          <p>
+            Same dark color scheme as Option 11 but with standard layout. Clean dark UI with white accents and pink highlights.
+          </p>
+          <div class="card-links">
+            <a href="option15_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option15_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 16 -->
+        <div class="card option-16">
+          <div class="card-number">16</div>
+          <h2>Glassmorphism Light</h2>
+          <p>
+            Frosted glass cards on light gradient background. Soft blur effects, transparency, and subtle depth.
+          </p>
+          <div class="card-links">
+            <a href="option16_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option16_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 17 -->
+        <div class="card option-17">
+          <div class="card-number">17</div>
+          <h2>3D Depth Cards</h2>
+          <p>
+            Heavy shadows and layered depth with floating card effects. Strong shadow play for dimensional UI.
+          </p>
+          <div class="card-links">
+            <a href="option17_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option17_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 18 -->
+        <div class="card option-18">
+          <div class="card-number">18</div>
+          <h2>Neon Glow Dark</h2>
+          <p>
+            Dark theme with glowing neon elements everywhere. Text glow, border glow, and vibrant box shadows.
+          </p>
+          <div class="card-links">
+            <a href="option18_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option18_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 19 -->
+        <div class="card option-19">
+          <div class="card-number">19</div>
+          <h2>Paper Cut Layers</h2>
+          <p>
+            Layered paper cutout effect with multiple shadow layers. Colorful paper-like depth on white background.
+          </p>
+          <div class="card-links">
+            <a href="option19_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option19_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 20 -->
+        <div class="card option-20">
+          <div class="card-number">20</div>
+          <h2>Claymorphism 3D</h2>
+          <p>
+            3D clay-like textures with soft inner shadows. Matte pastel colors with tactile appearance.
+          </p>
+          <div class="card-links">
+            <a href="option20_mobile.html" class="btn btn-primary">
+              <i data-lucide="smartphone" style="width: 18px; height: 18px"></i>
+              Mobile
+            </a>
+            <a href="option20_trip_detail.html" class="btn btn-secondary">
+              <i data-lucide="file-text" style="width: 18px; height: 18px"></i>
+              Detail
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>© 2024 SoleGoes • Built with ❤️ for travelers</p>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      // Open all mobile links in 416x816 window
+      document
+        .querySelectorAll('a[href*="mobile.html"], a[href*="detail.html"]')
+        .forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const url = this.getAttribute("href");
+            // Use popup with explicit dimensions
+            const features =
+              "width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no";
+            window.open(url, "_blank", features);
+          });
+        });
+    </script>
+  </body>
+</html>

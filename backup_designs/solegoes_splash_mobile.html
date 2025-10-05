@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SoleGoes - Splash Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="solegoes_theme.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg,
+                #FF6B9D 0%,
+                #FF8C42 50%,
+                #FFA959 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-container {
+            animation: logoEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            60% {
+                transform: scale(1.15);
+                opacity: 1;
+                filter: blur(0);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .glow-effect {
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8));
+            }
+        }
+
+        .tagline {
+            animation: taglineFloat 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes taglineFloat {
+            0% {
+                transform: translateY(15px);
+                opacity: 0;
+                letter-spacing: 0.12em;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+                letter-spacing: -0.01em;
+            }
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 6px;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: dotPulse 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        .dot:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.4;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .logo-text {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline-text {
+            color: white;
+            font-size: 1rem;
+            font-weight: 300;
+            margin-top: 0.75rem;
+            letter-spacing: 0.02em;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col items-center justify-center min-h-screen px-6">
+        <div class="logo-container text-center">
+            <div class="logo-icon mx-auto glow-effect">
+                🌍
+            </div>
+            <h1 class="logo-text">SoleGoes</h1>
+        </div>
+
+        <p class="tagline tagline-text">
+            Solo but not alone
+        </p>
+
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect to onboarding after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'solegoes_onboarding_mobile.html';
+        }, 3000);
+    </script>
+</body>
+</html>

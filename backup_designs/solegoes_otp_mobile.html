@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SoleGoes - OTP Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="solegoes_theme.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: oklch(0.98 0.005 264);
+            margin: 0;
+            padding: 0;
+        }
+
+        .phone-input-container {
+            display: flex;
+            gap: 0.625rem;
+            margin: 1.5rem 0;
+        }
+
+        .country-code {
+            background: white;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            border-radius: 12px;
+            padding: 0.75rem 0.875rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .country-code i {
+            width: 14px;
+            height: 14px;
+        }
+
+        .phone-input {
+            flex: 1;
+            background: white;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            border-radius: 12px;
+            padding: 0.75rem 0.875rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: oklch(0.68 0.22 35);
+            box-shadow: 0 0 0 3px oklch(0.68 0.22 35 / 0.1);
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .otp-box {
+            width: 48px;
+            height: 54px;
+            background: white;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .otp-box:focus {
+            outline: none;
+            border-color: oklch(0.68 0.22 35);
+            box-shadow: 0 0 0 3px oklch(0.68 0.22 35 / 0.1);
+            transform: scale(1.08);
+        }
+
+        .otp-box.filled {
+            border-color: oklch(0.68 0.22 35);
+            background: oklch(0.68 0.22 35 / 0.05);
+        }
+
+        .otp-box.error {
+            animation: shake 0.4s ease;
+            border-color: oklch(0.62 0.24 25);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, oklch(0.68 0.22 35), oklch(0.72 0.20 345));
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 0 6px 16px oklch(0.68 0.22 35 / 0.3);
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.96);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .phone-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, oklch(0.68 0.22 35 / 0.1), oklch(0.72 0.20 345 / 0.1));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.25rem;
+        }
+
+        .heading {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: oklch(0.15 0.02 264);
+            margin-bottom: 0.375rem;
+            line-height: 1.2;
+        }
+
+        .subheading {
+            font-size: 0.9375rem;
+            color: oklch(0.45 0.02 264);
+        }
+
+        .resend-link {
+            color: oklch(0.52 0.02 264);
+            font-size: 0.8125rem;
+            text-align: center;
+            margin-top: 1.25rem;
+        }
+
+        .resend-link button {
+            color: oklch(0.68 0.22 35);
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8125rem;
+        }
+
+        .resend-link button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .timer {
+            color: oklch(0.68 0.22 35);
+            font-weight: 600;
+        }
+
+        .timer.warning {
+            color: oklch(0.62 0.24 25);
+            animation: timerPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes timerPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .edit-link {
+            color: oklch(0.68 0.22 35);
+            font-weight: 500;
+            font-size: 0.8125rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+            color: oklch(0.52 0.02 264);
+            font-size: 0.8125rem;
+        }
+
+        .social-icon-btn {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 1.5px solid oklch(0.90 0.01 264);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .social-icon-btn:active {
+            transform: scale(0.94);
+        }
+
+        .social-icon-btn svg, .social-icon-btn i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .back-btn {
+            color: oklch(0.52 0.02 264);
+            transition: all 0.2s ease;
+            padding: 0.5rem;
+        }
+
+        .back-btn i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="p-4">
+            <button class="back-btn flex items-center gap-2" onclick="window.history.back()">
+                <i data-lucide="arrow-left"></i>
+            </button>
+        </header>
+
+        <!-- Phone Input Screen -->
+        <div id="phoneScreen" class="flex-1 flex flex-col justify-center px-5 pb-8">
+            <div class="max-w-md mx-auto w-full">
+                <div class="phone-icon">
+                    📱
+                </div>
+
+                <div class="text-center mb-6">
+                    <h1 class="heading">
+                        Enter Your Phone Number
+                    </h1>
+                    <p class="subheading">
+                        We'll send you a verification code via SMS
+                    </p>
+                </div>
+
+                <div class="phone-input-container">
+                    <div class="country-code">
+                        +91 <i data-lucide="chevron-down"></i>
+                    </div>
+                    <input
+                        type="tel"
+                        id="phoneNumber"
+                        class="phone-input"
+                        placeholder="98765 43210"
+                        maxlength="10"
+                    />
+                </div>
+
+                <button class="btn-primary mx-auto block" onclick="sendOTP()">
+                    Send OTP
+                </button>
+
+                <div class="divider">
+                    <span style="flex: 1; height: 1px; background: oklch(0.90 0.01 264);"></span>
+                    <span class="px-2">or</span>
+                    <span style="flex: 1; height: 1px; background: oklch(0.90 0.01 264);"></span>
+                </div>
+
+                <div class="flex justify-center gap-3">
+                    <button class="social-icon-btn" onclick="window.location.href='solegoes_login_mobile.html'">
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                    </button>
+                    <button class="social-icon-btn" onclick="window.location.href='solegoes_login_mobile.html'">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                        </svg>
+                    </button>
+                    <button class="social-icon-btn" onclick="window.location.href='solegoes_login_mobile.html'">
+                        <i data-lucide="mail" style="color: oklch(0.68 0.22 35);"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTP Verification Screen -->
+        <div id="otpScreen" class="hidden flex-1 flex flex-col justify-center px-5 pb-8">
+            <div class="max-w-md mx-auto w-full">
+                <div class="phone-icon">
+                    🔐
+                </div>
+
+                <div class="text-center mb-6">
+                    <h1 class="heading">
+                        Enter Verification Code
+                    </h1>
+                    <p class="subheading">
+                        Sent to <span id="displayPhone" class="font-semibold">+91 98765 43210</span>
+                        <a href="#" class="edit-link ml-2" onclick="editPhone()">[Edit]</a>
+                    </p>
+                </div>
+
+                <div class="otp-container">
+                    <input type="text" maxlength="1" class="otp-box" id="otp1" />
+                    <input type="text" maxlength="1" class="otp-box" id="otp2" />
+                    <input type="text" maxlength="1" class="otp-box" id="otp3" />
+                    <input type="text" maxlength="1" class="otp-box" id="otp4" />
+                    <input type="text" maxlength="1" class="otp-box" id="otp5" />
+                </div>
+
+                <button class="btn-primary mx-auto block" id="verifyBtn" onclick="verifyOTP()">
+                    Verify & Continue
+                </button>
+
+                <div class="resend-link">
+                    Didn't receive?
+                    <button id="resendBtn" disabled onclick="resendOTP()">
+                        Resend in <span class="timer" id="timer">00:45</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        let timeLeft = 45;
+        let timerInterval;
+
+        function sendOTP() {
+            const phone = document.getElementById('phoneNumber').value;
+            if (phone.length < 10) {
+                alert('Please enter a valid 10-digit phone number');
+                return;
+            }
+
+            document.getElementById('phoneScreen').classList.add('hidden');
+            document.getElementById('otpScreen').classList.remove('hidden');
+            document.getElementById('displayPhone').textContent = `+91 ${phone}`;
+
+            startTimer();
+            document.getElementById('otp1').focus();
+        }
+
+        function startTimer() {
+            timeLeft = 45;
+            document.getElementById('resendBtn').disabled = true;
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                const timerEl = document.getElementById('timer');
+                timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 10) {
+                    timerEl.classList.add('warning');
+                }
+
+                if (timeLeft === 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('resendBtn').disabled = false;
+                    document.getElementById('resendBtn').innerHTML = 'Resend OTP';
+                }
+            }, 1000);
+        }
+
+        function resendOTP() {
+            console.log('Resending OTP...');
+            startTimer();
+        }
+
+        function editPhone() {
+            document.getElementById('otpScreen').classList.add('hidden');
+            document.getElementById('phoneScreen').classList.remove('hidden');
+            clearInterval(timerInterval);
+        }
+
+        const otpBoxes = document.querySelectorAll('.otp-box');
+        otpBoxes.forEach((box, index) => {
+            box.addEventListener('input', (e) => {
+                if (e.target.value.length === 1) {
+                    e.target.classList.add('filled');
+                    if (index < otpBoxes.length - 1) {
+                        otpBoxes[index + 1].focus();
+                    }
+                } else {
+                    e.target.classList.remove('filled');
+                }
+            });
+
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    otpBoxes[index - 1].focus();
+                }
+            });
+        });
+
+        function verifyOTP() {
+            const otp = Array.from(otpBoxes).map(box => box.value).join('');
+
+            if (otp.length < 5) {
+                alert('Please enter the complete OTP');
+                return;
+            }
+
+            if (otp === '54321') {
+                window.location.href = 'solegoes_profile_setup_mobile.html';
+            } else {
+                otpBoxes.forEach(box => {
+                    box.classList.add('error');
+                    box.value = '';
+                    setTimeout(() => box.classList.remove('error'), 400);
+                });
+                otpBoxes[0].focus();
+            }
+        }
+    </script>
+</body>
+</html>

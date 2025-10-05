@@ -1,0 +1,355 @@
+/* DESIGN OPTION 3: Gradient Maximalism */
+/* Inspired by: Instagram, Spotify, Stripe, vibrant overlays, mesh gradients */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;800&display=swap');
+
+:root {
+  /* Base Colors - Dark with vibrant accents */
+  --background: oklch(0.96 0.005 280);
+  --foreground: oklch(0.18 0.02 280);
+
+  /* Gradient Colors - Rich, saturated */
+  --gradient-1-start: oklch(0.68 0.28 340);  /* Magenta */
+  --gradient-1-end: oklch(0.72 0.26 25);     /* Orange-Red */
+
+  --gradient-2-start: oklch(0.65 0.26 260);  /* Purple */
+  --gradient-2-end: oklch(0.72 0.24 295);    /* Blue-Purple */
+
+  --gradient-3-start: oklch(0.75 0.20 180);  /* Cyan */
+  --gradient-3-end: oklch(0.70 0.24 220);    /* Blue */
+
+  --gradient-4-start: oklch(0.80 0.22 140);  /* Green */
+  --gradient-4-end: oklch(0.75 0.24 165);    /* Teal */
+
+  --gradient-5-start: oklch(0.78 0.24 60);   /* Yellow */
+  --gradient-5-end: oklch(0.72 0.26 25);     /* Orange */
+
+  /* Semantic Colors */
+  --primary: oklch(0.68 0.28 340);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.65 0.26 260);
+  --secondary-foreground: oklch(0.99 0 0);
+
+  --accent: oklch(0.75 0.20 180);
+  --accent-foreground: oklch(0.18 0.02 280);
+
+  /* Muted */
+  --muted: oklch(0.92 0.005 280);
+  --muted-foreground: oklch(0.50 0.02 280);
+
+  /* Border */
+  --border: oklch(0.88 0.005 280);
+  --input: oklch(0.94 0.005 280);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Border Radius - Generous curves */
+  --radius: 1.75rem;
+  --radius-sm: 1rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 1.75rem;
+  --radius-xl: 2.25rem;
+
+  /* Shadows - Colorful, soft */
+  --shadow-sm: 0 2px 12px oklch(0 0 0 / 0.06),
+               0 1px 4px oklch(0.68 0.28 340 / 0.08);
+  --shadow: 0 4px 20px oklch(0 0 0 / 0.08),
+            0 2px 8px oklch(0.68 0.28 340 / 0.12);
+  --shadow-md: 0 8px 32px oklch(0 0 0 / 0.12),
+               0 4px 16px oklch(0.65 0.26 260 / 0.15);
+  --shadow-lg: 0 16px 48px oklch(0 0 0 / 0.16),
+               0 8px 24px oklch(0.65 0.26 260 / 0.20);
+  --shadow-xl: 0 24px 64px oklch(0 0 0 / 0.20),
+               0 12px 32px oklch(0.68 0.28 340 / 0.25);
+
+  /* Spacing */
+  --spacing: 0.25rem;
+}
+
+/* Gradient Backgrounds */
+.gradient-sunset {
+  background: linear-gradient(135deg, var(--gradient-1-start), var(--gradient-1-end));
+}
+
+.gradient-twilight {
+  background: linear-gradient(135deg, var(--gradient-2-start), var(--gradient-2-end));
+}
+
+.gradient-ocean {
+  background: linear-gradient(135deg, var(--gradient-3-start), var(--gradient-3-end));
+}
+
+.gradient-forest {
+  background: linear-gradient(135deg, var(--gradient-4-start), var(--gradient-4-end));
+}
+
+.gradient-sunrise {
+  background: linear-gradient(135deg, var(--gradient-5-start), var(--gradient-5-end));
+}
+
+/* Mesh Gradient Background */
+.mesh-gradient {
+  background:
+    radial-gradient(at 0% 0%, oklch(0.68 0.28 340 / 0.25) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, oklch(0.65 0.26 260 / 0.25) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, oklch(0.75 0.20 180 / 0.25) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, oklch(0.80 0.22 140 / 0.25) 0px, transparent 50%),
+    var(--background);
+}
+
+/* Animated Gradient Background */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(
+    270deg,
+    var(--gradient-1-start),
+    var(--gradient-2-start),
+    var(--gradient-3-start),
+    var(--gradient-4-start)
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Gradient Card */
+.gradient-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg,
+    var(--gradient-1-start),
+    var(--gradient-2-start),
+    var(--gradient-3-start)
+  );
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.gradient-card-inner {
+  background: var(--background);
+  border-radius: calc(var(--radius) - 2px);
+  padding: 1.5rem;
+}
+
+.gradient-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Gradient Button */
+.gradient-btn {
+  background: linear-gradient(135deg, var(--gradient-1-start), var(--gradient-1-end));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    oklch(0.75 0.30 340),
+    oklch(0.78 0.28 25)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-btn:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.gradient-btn:hover::before {
+  opacity: 1;
+}
+
+.gradient-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gradient-1-start), var(--gradient-2-start));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(
+    90deg,
+    var(--gradient-1-start),
+    var(--gradient-2-start),
+    var(--gradient-3-start),
+    var(--gradient-1-start)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientTextShift 3s linear infinite;
+}
+
+@keyframes gradientTextShift {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Gradient Border */
+.gradient-border {
+  border: 3px solid transparent;
+  background-image:
+    linear-gradient(var(--background), var(--background)),
+    linear-gradient(135deg, var(--gradient-1-start), var(--gradient-3-start));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Glassmorphism with Gradient */
+.glass-gradient {
+  background: oklch(0.98 0 0 / 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid oklch(0.95 0 0 / 0.3);
+  box-shadow: var(--shadow-md);
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(0.99 0 0 / 0.4),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Holographic Foil Effect */
+.holographic-foil {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-1-start) 0%,
+    var(--gradient-2-start) 25%,
+    var(--gradient-3-start) 50%,
+    var(--gradient-4-start) 75%,
+    var(--gradient-1-start) 100%
+  );
+  background-size: 400% 400%;
+  animation: holographicShine 4s ease infinite;
+}
+
+@keyframes holographicShine {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Gradient Chip/Tag */
+.gradient-chip {
+  background: linear-gradient(135deg,
+    var(--gradient-1-start),
+    var(--gradient-1-end)
+  );
+  color: white;
+  border-radius: 100px;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px oklch(0.68 0.28 340 / 0.3);
+  transition: all 0.3s ease;
+}
+
+.gradient-chip:hover {
+  box-shadow: 0 6px 20px oklch(0.68 0.28 340 / 0.4);
+  transform: translateY(-2px);
+}
+
+/* Gradient Overlay */
+.gradient-overlay {
+  position: relative;
+}
+
+.gradient-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    oklch(0 0 0 / 0.2) 50%,
+    oklch(0 0 0 / 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+/* Color Burst */
+@keyframes colorBurst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.color-burst {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gradient-1-start), transparent);
+  animation: colorBurst 1s ease-out;
+  pointer-events: none;
+}

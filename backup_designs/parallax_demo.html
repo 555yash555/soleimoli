@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Parallax Effect Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* Header that fades in as you scroll */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(0px);
+            z-index: 100;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .header.scrolled button {
+            background: #f0f0f0;
+            color: #000;
+        }
+
+        /* Parallax hero section */
+        .hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80') center/cover;
+            transform-origin: center top;
+            will-change: transform;
+        }
+
+        /* Gradient overlay that appears on scroll */
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            margin-top: -30px;
+            padding: 1.5rem;
+            min-height: 100vh;
+            z-index: 10;
+        }
+
+        .title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin: 2rem 0;
+        }
+
+        .section h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .dummy-content {
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 50;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .book-btn {
+            background: #FF6B4A;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .note {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            z-index: 200;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="note">👆 Scroll down to see parallax effect</div>
+
+    <!-- Fixed Header -->
+    <header class="header" id="header">
+        <button>←</button>
+        <div style="display: flex; gap: 0.5rem;">
+            <button>↗</button>
+            <button>♡</button>
+        </div>
+    </header>
+
+    <!-- Parallax Hero -->
+    <div class="hero">
+        <div class="hero-image" id="heroImage"></div>
+        <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1 class="title">Bali Beach Escape</h1>
+        <div class="rating">
+            ⭐ 4.9 (234 reviews)
+        </div>
+
+        <div class="section">
+            <h3>📅 Dates</h3>
+            <div class="dummy-content">Dates Section</div>
+        </div>
+
+        <div class="section">
+            <h3>📍 Itinerary</h3>
+            <div class="dummy-content">Itinerary Section</div>
+        </div>
+
+        <div class="section">
+            <h3>✨ Highlights</h3>
+            <div class="dummy-content">Highlights Section</div>
+        </div>
+
+        <div class="section">
+            <h3>📦 What's Included</h3>
+            <div class="dummy-content">Included Section</div>
+        </div>
+
+        <div class="section">
+            <h3>👥 Who's Coming</h3>
+            <div class="dummy-content">Participants Section</div>
+        </div>
+
+        <div class="section">
+            <h3>📸 Gallery</h3>
+            <div class="dummy-content">Gallery Section</div>
+        </div>
+
+        <div style="height: 100px;"></div>
+    </div>
+
+    <!-- Sticky CTA -->
+    <div class="cta-bar">
+        <div class="price">₹15,000</div>
+        <button class="book-btn">Book Now →</button>
+    </div>
+
+    <script>
+        const header = document.getElementById('header');
+        const heroImage = document.getElementById('heroImage');
+
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+
+                    // Parallax effect - image moves slower than scroll
+                    heroImage.style.transform = `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0005})`;
+
+                    // Header background fade
+                    if (scrollY > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Hide note after 3 seconds
+        setTimeout(() => {
+            document.querySelector('.note').style.display = 'none';
+        }, 3000);
+    </script>
+</body>
+</html>
