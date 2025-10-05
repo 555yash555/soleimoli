@@ -28,9 +28,10 @@
 
         /* Header */
         .header {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(16px) saturate(180%);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
             padding: 0.75rem 1rem;
             position: sticky;
             top: 0;
@@ -46,8 +47,10 @@
         .icon-btn {
             width: 36px;
             height: 36px;
-            background: rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -57,7 +60,7 @@
         }
 
         .icon-btn:active {
-            background: rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.8);
         }
 
         .notif-badge {
@@ -92,8 +95,10 @@
 
         /* Search */
         .search {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 12px;
             padding: 0.625rem 0.875rem;
             display: flex;
@@ -103,7 +108,8 @@
         }
 
         .search:focus-within {
-            border-color: #1a1a1a;
+            border-color: rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.7);
             box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
         }
 
@@ -122,8 +128,10 @@
         }
 
         .filter-btn {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 10px;
             padding: 0.625rem;
             min-width: 42px;
@@ -132,17 +140,19 @@
         }
 
         .filter-btn:active {
-            background: rgba(0,0,0,0.04);
+            background: rgba(255,255,255,0.8);
         }
 
         /* Featured */
         .featured {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 16px;
             overflow: hidden;
             margin: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .img-wrap {
@@ -160,9 +170,10 @@
             position: absolute;
             top: 0.625rem;
             left: 0.625rem;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0,0,0,0.1);
             color: #1a1a1a;
             border-radius: 100px;
             padding: 0.3125rem 0.75rem;
@@ -176,9 +187,10 @@
             right: 0.625rem;
             width: 36px;
             height: 36px;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -212,8 +224,10 @@
         }
 
         .meta-tag {
-            background: rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 6px;
             padding: 0.25rem 0.625rem;
             font-weight: 500;
@@ -239,15 +253,17 @@
 
         /* Spin */
         .spin {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 12px;
             margin: 0.875rem 1rem;
             padding: 0.875rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .spin h3 {
@@ -291,8 +307,10 @@
 
         /* Chips */
         .chip {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 100px;
             padding: 0.4375rem 0.875rem;
             font-weight: 500;
@@ -311,11 +329,13 @@
         /* Trip Cards */
         .trip-card {
             min-width: 180px;
-            background: white;
-            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .trip-card img {
@@ -361,9 +381,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(16px) saturate(180%);
-            border-top: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid rgba(0,0,0,0.08);
             padding: 0.5rem 0.625rem;
             display: flex;
             justify-content: space-around;
