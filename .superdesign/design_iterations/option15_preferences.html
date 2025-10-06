@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Preferences - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: #0d0d0d !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #fff !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 428px;
+            margin: 0 auto;
+            background: #0d0d0d;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: #0d0d0d;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .theme-toggle i {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        .progress {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .skip-btn {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            cursor: pointer;
+        }
+
+        /* Content */
+        .content {
+            padding: 1.5rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 0.9375rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .helper-text {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1rem;
+        }
+
+        /* Pills Grid */
+        .pills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.75rem;
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .pill:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .pill.selected {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Budget Options */
+        .budget-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .budget-option {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .budget-option:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .budget-option.selected {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .budget-icon {
+            font-size: 1.25rem;
+        }
+
+        .budget-text {
+            flex: 1;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0d0d0d;
+            padding: 1rem;
+            border-radius: 0.875rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 396px;
+            width: calc(100% - 3rem);
+        }
+
+        .btn-primary:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <button class="back-btn" onclick="window.location.href='option15_profile_setup.html'">
+                    <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+            <div class="progress">(2/4)</div>
+            <div class="skip-btn" onclick="skip()">Skip →</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1 class="title">Tell us about your preferences</h1>
+            <p class="subtitle">Help us personalize your trips</p>
+
+            <!-- Travel Interests -->
+            <div class="section-title">Travel Interests</div>
+            <div class="helper-text">(Select at least 3)</div>
+            <div class="pills-grid" id="interestsGrid">
+                <div class="pill" onclick="togglePill(this, 'interests')">🏖️ Beach</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🏔️ Mountain</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🏛️ Heritage</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🎉 Adventure</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🍜 Food</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🎨 Art</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🎵 Music</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🏕️ Camping</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🧘 Wellness</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🎿 Sports</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🌃 Nightlife</div>
+                <div class="pill" onclick="togglePill(this, 'interests')">🛍️ Shopping</div>
+            </div>
+
+            <!-- Budget -->
+            <div class="section-title">Average Budget per Trip</div>
+            <div class="helper-text">(Select one)</div>
+            <div class="budget-options" id="budgetOptions">
+                <div class="budget-option" onclick="toggleBudget(this)">
+                    <div class="budget-icon">💰</div>
+                    <div class="budget-text">Under ₹10,000</div>
+                </div>
+                <div class="budget-option" onclick="toggleBudget(this)">
+                    <div class="budget-icon">💰💰</div>
+                    <div class="budget-text">₹10,000 - ₹25,000</div>
+                </div>
+                <div class="budget-option" onclick="toggleBudget(this)">
+                    <div class="budget-icon">💰💰💰</div>
+                    <div class="budget-text">₹25,000 - ₹50,000</div>
+                </div>
+                <div class="budget-option" onclick="toggleBudget(this)">
+                    <div class="budget-icon">💰💰💰💰</div>
+                    <div class="budget-text">₹50,000+</div>
+                </div>
+            </div>
+
+            <!-- Travel Style -->
+            <div class="section-title">Travel Style</div>
+            <div class="helper-text">(Select one)</div>
+            <div class="pills-grid" id="styleGrid">
+                <div class="pill" onclick="togglePill(this, 'style')">🎒 Backpacker</div>
+                <div class="pill" onclick="togglePill(this, 'style')">🏨 Comfort</div>
+                <div class="pill" onclick="togglePill(this, 'style')">👑 Luxury</div>
+                <div class="pill" onclick="togglePill(this, 'style')">🌿 Eco</div>
+            </div>
+
+            <!-- Trip Duration -->
+            <div class="section-title">Trip Duration Preference</div>
+            <div class="helper-text">(Select one)</div>
+            <div class="pills-grid" id="durationGrid">
+                <div class="pill" onclick="togglePill(this, 'duration')">📅 Weekend<br><small style="font-size: 0.75rem; opacity: 0.7;">(2-3 days)</small></div>
+                <div class="pill" onclick="togglePill(this, 'duration')">📆 Week<br><small style="font-size: 0.75rem; opacity: 0.7;">(5-7 days)</small></div>
+                <div class="pill" onclick="togglePill(this, 'duration')">📋 Extended<br><small style="font-size: 0.75rem; opacity: 0.7;">(10+ days)</small></div>
+                <div class="pill" onclick="togglePill(this, 'duration')">🗓️ Flexible<br><small style="font-size: 0.75rem; opacity: 0.7;">(Any)</small></div>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="continueBtn" onclick="continue_next()">Continue</button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        let selectedInterests = [];
+        let selectedBudget = null;
+        let selectedStyle = null;
+        let selectedDuration = null;
+
+        function togglePill(element, type) {
+            if (type === 'interests') {
+                if (element.classList.contains('selected')) {
+                    element.classList.remove('selected');
+                    const index = selectedInterests.indexOf(element.textContent);
+                    if (index > -1) selectedInterests.splice(index, 1);
+                } else {
+                    element.classList.add('selected');
+                    selectedInterests.push(element.textContent);
+                }
+            } else if (type === 'style') {
+                document.querySelectorAll('#styleGrid .pill').forEach(p => p.classList.remove('selected'));
+                element.classList.add('selected');
+                selectedStyle = element.textContent;
+            } else if (type === 'duration') {
+                document.querySelectorAll('#durationGrid .pill').forEach(p => p.classList.remove('selected'));
+                element.classList.add('selected');
+                selectedDuration = element.textContent;
+            }
+
+            checkValidation();
+        }
+
+        function toggleBudget(element) {
+            document.querySelectorAll('.budget-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedBudget = element.querySelector('.budget-text').textContent;
+            checkValidation();
+        }
+
+        function checkValidation() {
+            const isValid = selectedInterests.length >= 3 && selectedBudget && selectedStyle && selectedDuration;
+            // document.getElementById("continueBtn").disabled = !isValid;
+        }
+
+        function continue_next() {
+            window.location.href = "option15_mobile.html";
+        }
+
+        function skip() {
+            window.location.href = 'option15_mobile.html';
+        }
+
+        function toggleTheme() {
+            window.location.href = 'option15_preferences_light.html';
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>

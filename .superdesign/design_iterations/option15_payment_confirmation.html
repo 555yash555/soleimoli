@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Payment Successful - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: #0d0d0d !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #fff !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            background: #0d0d0d;
+        }
+
+        /* Header */
+        .close-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: auto;
+            margin-bottom: 2rem;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(76, 175, 80, 0.15);
+            border: 3px solid #4caf50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-icon i {
+            width: 50px !important;
+            height: 50px !important;
+            color: #4caf50;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Content */
+        .title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 0.9375rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: #fff;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .detail-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .detail-value {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #fff;
+            text-align: right;
+            max-width: 60%;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 0.875rem;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #0d0d0d;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-tertiary {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-tertiary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .button-group {
+            margin-top: auto;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Close Button -->
+        <button class="close-btn" onclick="window.location.href='option15_mobile.html'">
+            <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+        </button>
+
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <i data-lucide="check"></i>
+        </div>
+
+        <!-- Title -->
+        <h1 class="title">Payment Successful!</h1>
+        <p class="subtitle">Your booking has been confirmed</p>
+
+        <div class="divider"></div>
+
+        <!-- Transaction Details -->
+        <div class="section-title">Transaction Details</div>
+
+        <div class="detail-row">
+            <div class="detail-label">Trip Name</div>
+            <div class="detail-value">Bali Beach Escape</div>
+        </div>
+
+        <div class="detail-row">
+            <div class="detail-label">Amount Paid</div>
+            <div class="detail-value">₹15,000</div>
+        </div>
+
+        <div class="detail-row">
+            <div class="detail-label">Transaction ID</div>
+            <div class="detail-value">TXN1234567890</div>
+        </div>
+
+        <div class="detail-row">
+            <div class="detail-label">Date & Time</div>
+            <div class="detail-value">Dec 28, 2024 at 3:45 PM</div>
+        </div>
+
+        <div class="detail-row">
+            <div class="detail-label">Payment Method</div>
+            <div class="detail-value">•••• 4242 (Visa)</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button class="btn btn-secondary" onclick="downloadReceipt()">
+                <i data-lucide="download" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;"></i>
+                Download Receipt
+            </button>
+            <button class="btn btn-primary" onclick="viewTripDetails()">View Trip Details</button>
+            <button class="btn btn-tertiary" onclick="backToHome()">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadReceipt() {
+            alert('Receipt download started!');
+        }
+
+        function viewTripDetails() {
+            window.location.href = 'option15_trip_detail.html';
+        }
+
+        function backToHome() {
+            window.location.href = 'option15_mobile.html';
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Get current date and time
+        const now = new Date();
+        const dateTimeStr = now.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        }) + ' at ' + now.toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
+        document.querySelectorAll('.detail-value')[3].textContent = dateTimeStr;
+    </script>
+</body>
+</html>

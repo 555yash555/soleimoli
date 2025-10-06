@@ -389,8 +389,8 @@
         <header class="header">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <button class="icon-btn">
-                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    <button class="icon-btn" onclick="window.location.href='option15_preferences.html'">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
                     </button>
                     <div class="logo">SoleGoes</div>
                 </div>
@@ -402,7 +402,7 @@
                         <i data-lucide="bell" class="w-5 h-5"></i>
                         <span class="notif-badge">3</span>
                     </button>
-                    <button class="icon-btn">
+                    <button class="icon-btn" onclick="window.location.href='option15_profile_page.html'">
                         <div class="avatar">S</div>
                     </button>
                 </div>
@@ -545,8 +545,7 @@
             const clickedElement = e.target.closest('[data-href]');
             if (clickedElement) {
                 const url = clickedElement.getAttribute('data-href');
-                const features = 'width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no';
-                window.open(url, '_blank', features);
+                window.location.href = url;
                 return;
             }
 
@@ -554,8 +553,7 @@
             if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
                 e.preventDefault();
                 const url = link.getAttribute('href');
-                const features = 'width=416,height=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no';
-                window.open(url, '_blank', features);
+                window.location.href = url;
             }
         });
     </script>

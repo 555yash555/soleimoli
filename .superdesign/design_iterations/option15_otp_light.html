@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OTP Verification - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: #fafafa !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #1a1a1a !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            background: #fafafa;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(-2px);
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .theme-toggle i {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+
+        .icon-container i {
+            width: 36px !important;
+            height: 36px !important;
+            color: #1a1a1a;
+        }
+
+        .title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            font-size: 0.9375rem;
+            text-align: center;
+            color: rgba(26, 26, 26, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .edit-link {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 2.5rem;
+        }
+
+        .label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(26, 26, 26, 0.7);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* OTP Input */
+        .otp-container {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .otp-input {
+            width: 48px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .otp-input.filled {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Resend */
+        .resend-container {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .resend-text {
+            font-size: 0.875rem;
+            color: rgba(26, 26, 26, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .resend-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .resend-link:hover {
+            color: rgba(26, 26, 26, 0.7);
+        }
+
+        .resend-link.disabled {
+            color: rgba(26, 26, 26, 0.3);
+            cursor: not-allowed;
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fafafa;
+            padding: 1rem;
+            border-radius: 0.875rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='option15_login_light.html'">
+                <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i data-lucide="moon"></i>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="icon-container">
+                <i data-lucide="smartphone"></i>
+            </div>
+
+            <h1 class="title">Verify Your Number</h1>
+            <p class="subtitle">We sent a code to +91 98765 43210</p>
+            <div class="edit-link" onclick="editNumber()">Edit</div>
+
+            <div class="label">Enter 6-digit code</div>
+
+            <div class="otp-container" id="otpContainer">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            </div>
+
+            <div class="resend-container">
+                <div class="resend-text">Didn't receive code?</div>
+                <div class="resend-link" id="resendLink" onclick="resendOTP()">Resend (<span id="timer">30</span>s)</div>
+            </div>
+
+            <button class="btn-primary" id="verifyBtn" onclick="verifyOTP()">Verify</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        }
+
+        function toggleTheme() {
+            window.location.href = "option15_otp.html";
+
+        const inputs = document.querySelectorAll('.otp-input');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const resendLink = document.getElementById('resendLink');
+        const timerSpan = document.getElementById('timer');
+        let timer = 30;
+        let timerInterval;
+
+        // OTP Input handling
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+
+                // Only allow numbers
+                if (!/^\d*$/.test(value)) {
+                    e.target.value = '';
+                    return;
+                }
+
+                if (value) {
+                    input.classList.add('filled');
+                    // Move to next input
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                } else {
+                    input.classList.remove('filled');
+                }
+
+                checkComplete();
+            });
+
+            input.addEventListener('keydown', (e) => {
+                // Move to previous input on backspace
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                    inputs[index - 1].value = '';
+                    inputs[index - 1].classList.remove('filled');
+                    checkComplete();
+                }
+            });
+
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text').slice(0, 6);
+
+                if (/^\d+$/.test(pastedData)) {
+                    pastedData.split('').forEach((char, i) => {
+                        if (inputs[i]) {
+                            inputs[i].value = char;
+                            inputs[i].classList.add('filled');
+                        }
+                    });
+                    checkComplete();
+                }
+            });
+        });
+
+        function checkComplete() {
+            const allFilled = Array.from(inputs).every(input => input.value);
+            // verifyBtn.disabled = !allFilled;
+        }
+
+        function verifyOTP() {
+            const otp = Array.from(inputs).map(input => input.value).join('');
+            console.log('Verifying OTP:', otp);
+
+            // Simulate verification
+            if (otp === '123456') {
+                window.location.href = "option15_profile_setup_light.html";
+        }
+
+        function toggleTheme() {
+            window.location.href = "option15_otp.html";
+            } else {
+                // Shake animation on error
+                const container = document.getElementById('otpContainer');
+                container.classList.add('shake');
+                setTimeout(() => container.classList.remove('shake'), 300);
+
+                // Clear inputs
+                inputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('filled');
+                });
+                inputs[0].focus();
+                checkComplete();
+            }
+        }
+
+        function editNumber() {
+            window.history.back();
+        }
+
+        function resendOTP() {
+            if (resendLink.classList.contains('disabled')) return;
+
+            console.log('Resending OTP...');
+            startTimer();
+        }
+
+        function startTimer() {
+            timer = 30;
+            resendLink.classList.add('disabled');
+
+            timerInterval = setInterval(() => {
+                timer--;
+                timerSpan.textContent = timer;
+
+                if (timer <= 0) {
+                    clearInterval(timerInterval);
+                    resendLink.classList.remove('disabled');
+                    timerSpan.textContent = '30';
+                }
+            }, 1000);
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            window.location.href = "option15_otp.html";
+        }
+
+        // Auto-focus first input
+        inputs[0].focus();
+
+        // Start timer on load
+        startTimer();
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

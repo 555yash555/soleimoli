@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Onboarding - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: #0d0d0d !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #fff !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .skip-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.625rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skip-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Image Section */
+        .hero-section {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 0 0 1.5rem 1.5rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hero-image.fade-out {
+            opacity: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13,13,13,0.4) 0%, rgba(13,13,13,0.8) 100%);
+        }
+
+        /* Content Section */
+        .content-section {
+            flex: 1;
+            padding: 2.5rem 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .text-content {
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #fff;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .slide-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 340px;
+            margin: 0 auto;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .text-content.fade-out {
+            opacity: 0;
+        }
+
+        .button-section {
+            margin-top: auto;
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0d0d0d;
+            padding: 1rem;
+            border-radius: 0.875rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 1.25rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: #fff;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 375px) {
+            .slide-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <button class="theme-toggle" onclick="window.location.href='option15_onboarding_light.html'" title="Switch to Light Mode">
+                <i data-lucide="sun" class="w-5 h-5"></i>
+            </button>
+            <button class="skip-btn" onclick="skipOnboarding()">Skip</button>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img id="heroImage" src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80" alt="Travel" class="hero-image" />
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="text-content" id="textContent">
+                <h1 class="slide-title" id="slideTitle">Discover New Places</h1>
+                <p class="slide-description" id="slideDescription">Travel solo but never alone. Connect with fellow travelers and explore the world together</p>
+            </div>
+
+            <div class="button-section">
+                <div class="progress-dots" id="progressDots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <button class="btn-primary" id="nextBtn" onclick="nextSlide()">Next</button>
+                <div class="footer-link">
+                    Already have an account? <a href="option15_login.html">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const slides = [
+            {
+                image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80',
+                title: 'Discover New Places',
+                description: 'Travel solo but never alone. Connect with fellow travelers and explore the world together'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=800&q=80',
+                title: 'Meet Like-Minded Travelers',
+                description: 'Join groups of solo travelers with similar interests and make lifelong friendships'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80',
+                title: 'Safe & Verified Experiences',
+                description: 'All trips curated by trusted agencies with verified reviews from real travelers'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80',
+                title: 'Easy Booking & Payment',
+                description: 'Simple booking process with secure payments and instant confirmation'
+            }
+        ];
+
+        let currentSlide = 0;
+        const heroImage = document.getElementById('heroImage');
+        const textContent = document.getElementById('textContent');
+        const slideTitle = document.getElementById('slideTitle');
+        const slideDescription = document.getElementById('slideDescription');
+        const dots = document.querySelectorAll('.dot');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateSlide(index) {
+            // Fade out
+            textContent.classList.add('fade-out');
+            heroImage.classList.add('fade-out');
+
+            setTimeout(() => {
+                // Update content
+                heroImage.src = slides[index].image;
+                slideTitle.textContent = slides[index].title;
+                slideDescription.textContent = slides[index].description;
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+
+                // Update button
+                if (index === slides.length - 1) {
+                    nextBtn.textContent = 'Get Started';
+                    nextBtn.onclick = getStarted;
+                } else {
+                    nextBtn.textContent = 'Next';
+                    nextBtn.onclick = nextSlide;
+                }
+
+                // Fade in
+                textContent.classList.remove('fade-out');
+                heroImage.classList.remove('fade-out');
+            }, 300);
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide(currentSlide);
+            }
+        }
+
+        function getStarted() {
+            window.location.href = "option15_login.html";
+        }
+
+        function skipOnboarding() {
+            window.location.href = "option15_login.html";
+        }
+
+        // Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>

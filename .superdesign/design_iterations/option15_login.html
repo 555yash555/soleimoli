@@ -91,6 +91,31 @@
             transform: scale(1.05);
         }
 
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+            position: absolute;
+            top: 1.25rem;
+            right: 1.5rem;
+            z-index: 10;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
         /* Content */
         .content {
             flex: 1;
@@ -351,15 +376,15 @@
     <div class="container">
         <!-- Hero Section -->
         <div class="hero-section">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="Travel together" class="hero-image" />
+            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80" alt="Coorg coffee plantation" class="hero-image" />
             <div class="hero-overlay"></div>
             <div class="hero-content">
+                <button class="theme-toggle" onclick="window.location.href='option15_login_light.html'" title="Switch to Light Mode">
+                    <i data-lucide="sun" class="w-5 h-5"></i>
+                </button>
                 <div class="header">
                     <button class="icon-btn" onclick="window.history.back()">
                         <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    </button>
-                    <button class="icon-btn" onclick="window.location.href='option15_login_light.html'" title="Switch to Light Mode">
-                        <i data-lucide="sun" class="w-5 h-5"></i>
                     </button>
                 </div>
                 <div class="hero-text">
@@ -382,7 +407,7 @@
                     <label class="label">Email or Phone</label>
                     <div class="input-wrapper">
                         <i data-lucide="mail" class="w-5 h-5 input-icon"></i>
-                        <input type="text" class="input" placeholder="Enter your email or phone" required />
+                        <input type="text" class="input" placeholder="Enter your email or phone" />
                     </div>
                 </div>
 
@@ -390,7 +415,7 @@
                     <label class="label">Password</label>
                     <div class="input-wrapper">
                         <i data-lucide="lock" class="w-5 h-5 input-icon"></i>
-                        <input type="password" class="input" placeholder="Enter your password" required />
+                        <input type="password" class="input" placeholder="Enter your password" />
                     </div>
                 </div>
 
@@ -438,8 +463,7 @@
 
         function handleLogin(event) {
             event.preventDefault();
-            alert('Login successful! Redirecting to home...');
-            window.location.href = 'option15_mobile.html';
+            window.location.href = "option15_otp.html";
             return false;
         }
     </script>
