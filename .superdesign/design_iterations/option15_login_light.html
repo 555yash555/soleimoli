@@ -91,6 +91,29 @@
             transform: scale(1.05);
         }
 
+        .back-btn {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(-2px);
+        }
+
         .theme-toggle {
             width: 40px;
             height: 40px;
@@ -380,6 +403,9 @@
             <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80" alt="Coorg coffee plantation" class="hero-image" />
             <div class="hero-overlay"></div>
             <div class="hero-content">
+            <button class="back-btn" onclick="window.location.href='option15_onboarding_light.html'" title="Back to Onboarding">
+                <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            </button>
                 <button class="theme-toggle" onclick="window.location.href='option15_login.html'" title="Switch to Dark Mode">
                     <i data-lucide="moon" class="w-5 h-5"></i>
                 </button>
