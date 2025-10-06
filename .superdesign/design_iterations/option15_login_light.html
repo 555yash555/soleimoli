@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            background: #fafafa !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #1a1a1a !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #1a1a1a;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: scale(1.05);
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #1a1a1a 0%, rgba(26,26,26,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+
+        .title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 0.9375rem;
+            color: rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.875rem;
+            padding: 0.875rem 1rem;
+            padding-left: 3rem;
+            font-size: 0.9375rem;
+            color: #1a1a1a;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .input::placeholder {
+            color: rgba(0, 0, 0, 0.3);
+        }
+
+        .input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            font-size: 0.8125rem;
+            color: rgba(0, 0, 0, 0.6);
+            text-decoration: none;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-link:hover {
+            color: #1a1a1a;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            border: none;
+            border-radius: 0.875rem;
+            padding: 1rem;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: #fafafa;
+            cursor: pointer;
+            font-family: 'Manrope', sans-serif;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            font-size: 0.8125rem;
+            color: rgba(0, 0, 0, 0.4);
+            font-weight: 500;
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-social {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.875rem;
+            padding: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            font-family: 'Manrope', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-social:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+
+        .footer-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content > * {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .content > *:nth-child(1) { animation-delay: 0.1s; }
+        .content > *:nth-child(2) { animation-delay: 0.2s; }
+        .content > *:nth-child(3) { animation-delay: 0.3s; }
+        .content > *:nth-child(4) { animation-delay: 0.4s; }
+        .content > *:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <button class="icon-btn" onclick="window.history.back()">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <button class="icon-btn" onclick="window.location.href='option15_login.html'" title="Switch to Dark Mode">
+                <i data-lucide="moon" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="logo-container">
+                <div class="logo">SoleGoes</div>
+                <div class="tagline">Travel Solo, Meet People</div>
+            </div>
+
+            <div class="title">Welcome Back</div>
+            <div class="subtitle">Sign in to continue your journey</div>
+
+            <form onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label class="label">Email or Phone</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail" class="w-5 h-5 input-icon"></i>
+                        <input type="text" class="input" placeholder="Enter your email or phone" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Password</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="lock" class="w-5 h-5 input-icon"></i>
+                        <input type="password" class="input" placeholder="Enter your password" required />
+                    </div>
+                </div>
+
+                <a href="#" class="forgot-link">Forgot Password?</a>
+
+                <button type="submit" class="btn-primary">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+
+            <div class="social-buttons">
+                <button class="btn-social" onclick="alert('Google login coming soon!')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M19.8055 10.2292C19.8055 9.55057 19.7498 8.86657 19.6305 8.19922H10.2002V11.9878H15.6013C15.3775 13.1954 14.6568 14.2436 13.6178 14.907V17.3164H16.8265C18.7115 15.5802 19.8055 13.0988 19.8055 10.2292Z" fill="#4285F4"/>
+                        <path d="M10.2002 19.643C12.7408 19.643 14.8774 18.783 16.8265 17.3164L13.6178 14.907C12.7252 15.4753 11.5753 15.8064 10.2002 15.8064C7.74719 15.8064 5.66836 14.0546 4.87441 11.7305H1.55469V14.2084C3.51391 18.1057 6.69312 19.643 10.2002 19.643Z" fill="#34A853"/>
+                        <path d="M4.87441 11.7305C4.42965 10.5229 4.42965 9.20527 4.87441 7.99765V5.51978H1.55469C0.163359 8.29028 0.163359 11.4379 1.55469 14.2084L4.87441 11.7305Z" fill="#FBBC04"/>
+                        <path d="M10.2002 4.02172C11.6511 4.00026 13.0507 4.52974 14.0976 5.50024L16.9463 2.65154C14.7795 0.600463 11.9347 -0.501468 10.2002 -0.478008C6.69312 -0.478008 3.51391 1.05929 1.55469 4.95656L4.87441 7.43443C5.66836 5.11038 7.74719 4.02172 10.2002 4.02172Z" fill="#EA4335"/>
+                    </svg>
+                    Google
+                </button>
+                <button class="btn-social" onclick="alert('Apple login coming soon!')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="black">
+                        <path d="M16.1889 10.6484C16.2057 12.9023 18.1006 13.6992 18.1201 13.709C18.1025 13.7598 17.8018 14.8086 16.9775 15.8926C16.2627 16.8301 15.5234 17.7617 14.3896 17.7852C13.2764 17.8086 12.8994 17.1035 11.624 17.1035C10.3486 17.1035 9.93066 17.7617 8.86621 17.8086C7.77246 17.8555 6.93066 16.8066 6.20898 15.874C4.73926 13.9707 3.61426 10.5527 5.11426 8.22266C5.85645 7.06641 7.08105 6.33203 8.40137 6.30859C9.47461 6.28516 10.4873 7.04297 11.1396 7.04297C11.792 7.04297 13.0166 6.13281 14.3105 6.26172C14.8584 6.28516 16.4111 6.47266 17.4541 7.96094C17.3662 8.01562 16.1748 8.73047 16.1889 10.6484ZM13.4189 4.71484C14.0068 3.98047 14.4092 2.98828 14.2949 2C13.4463 2.03516 12.4277 2.57422 11.8193 3.30859C11.2695 3.97656 10.7871 4.98438 10.9209 5.95312C11.8779 6.02344 12.8545 5.44922 13.4189 4.71484Z"/>
+                    </svg>
+                    Apple
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                Don't have an account? <a href="option15_onboarding_light.html" class="footer-link">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('Login successful! Redirecting to home...');
+            window.location.href = 'option15_light_mobile.html';
+            return false;
+        }
+    </script>
+</body>
+</html>
