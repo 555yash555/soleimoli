@@ -31,7 +31,35 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+            border-radius: 0 0 1.5rem 1.5rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13,13,13,0.4) 0%, rgba(13,13,13,0.8) 100%);
+        }
+
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
             padding: 1.5rem;
+            z-index: 10;
         }
 
         /* Header */
@@ -39,7 +67,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: auto;
         }
 
         .icon-btn {
@@ -74,39 +102,51 @@
             margin: 0 auto;
         }
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: 3rem;
+        .hero-text {
+            margin-top: auto;
+            margin-bottom: 1.5rem;
         }
 
-        .logo {
-            font-size: 2.5rem;
+        .hero-title {
+            font-size: 2rem;
             font-weight: 800;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
         }
 
-        .tagline {
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.5);
+        .hero-subtitle {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
         }
 
-        .title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
+        /* Form Container */
+        .form-container {
+            flex: 1;
+            padding: 1.5rem;
+            background: #0d0d0d;
         }
 
-        .subtitle {
-            font-size: 0.9375rem;
+        .form-wrapper {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .welcome-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .welcome-subtitle {
+            font-size: 0.875rem;
             color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 2rem;
             font-weight: 500;
         }
 
@@ -309,25 +349,33 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <button class="icon-btn" onclick="window.history.back()">
-                <i data-lucide="arrow-left" class="w-5 h-5"></i>
-            </button>
-            <button class="icon-btn" onclick="window.location.href='option15_login_light.html'" title="Switch to Light Mode">
-                <i data-lucide="sun" class="w-5 h-5"></i>
-            </button>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="Travel together" class="hero-image" />
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="header">
+                    <button class="icon-btn" onclick="window.history.back()">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                    <button class="icon-btn" onclick="window.location.href='option15_login_light.html'" title="Switch to Light Mode">
+                        <i data-lucide="sun" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div class="hero-text">
+                    <div class="hero-title">Embark on Your<br/>Next Journey</div>
+                    <div class="hero-subtitle">Solo travel, made social ✨</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Content -->
-        <div class="content">
-            <div class="logo-container">
-                <div class="logo">SoleGoes</div>
-                <div class="tagline">Travel Solo, Meet People</div>
-            </div>
-
-            <div class="title">Welcome Back</div>
-            <div class="subtitle">Sign in to continue your journey</div>
+        <!-- Form Container -->
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="welcome-text">
+                    <div class="welcome-title">Welcome back</div>
+                    <div class="welcome-subtitle">Sign in to continue</div>
+                </div>
 
             <form onsubmit="return handleLogin(event)">
                 <div class="form-group">
@@ -374,12 +422,13 @@
                     Apple
                 </button>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <div class="footer-text">
-                Don't have an account? <a href="option15_onboarding.html" class="footer-link">Sign Up</a>
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-text">
+                    Don't have an account? <a href="option15_onboarding.html" class="footer-link">Sign Up</a>
+                </div>
+            </div>
             </div>
         </div>
     </div>
