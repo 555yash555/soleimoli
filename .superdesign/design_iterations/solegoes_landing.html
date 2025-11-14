@@ -1119,21 +1119,30 @@
             </div>
 
             <div class="waitlist-form">
-                <form id="waitlistForm" onsubmit="handleWaitlistSubmit(event)">
+                <form id="waitlistForm" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="aecf6c2a-c5dc-4daa-b9cc-b8de2830fa9f">
+
+                    <!-- Optional: Customize email subject -->
+                    <input type="hidden" name="subject" value="New SoleGoes Launch Partner Application">
+
+                    <!-- Optional: Redirect after submission -->
+                    <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Agency Name" required>
+                        <input type="text" name="agency_name" class="form-input" placeholder="Agency Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Your Name" required>
+                        <input type="text" name="name" class="form-input" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-input" placeholder="Email Address" required>
+                        <input type="email" name="email" class="form-input" placeholder="Email Address" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-input" placeholder="Phone Number" required>
+                        <input type="tel" name="phone" class="form-input" placeholder="Phone Number" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Instagram Handle (Optional)">
+                        <input type="text" name="instagram" class="form-input" placeholder="Instagram Handle (Optional)">
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
                         Apply to Be a Launch Partner
@@ -1255,12 +1264,8 @@
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Waitlist form handling
-        function handleWaitlistSubmit(event) {
-            event.preventDefault();
-            alert('🚀 Application received! We\'ll review your agency and reach out within 48 hours with next steps.');
-            event.target.reset();
-        }
+        // Web3Forms handles form submission automatically
+        // No custom JavaScript needed - form submits to Web3Forms API
 
         // Parallax effect on scroll
         let ticking = false;
