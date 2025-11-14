@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Profile - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        html::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        body {
+            background: #fafafa !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #1a1a1a !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        body::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        * {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: #fafafa;
+            padding-bottom: 2rem;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: #fafafa;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn, .settings-btn, .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover, .settings-btn:hover, .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .header-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fafafa;
+        }
+
+        .edit-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 32px;
+            height: 32px;
+            background: #fafafa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .edit-badge i {
+            width: 16px !important;
+            height: 16px !important;
+            color: #fafafa;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-email, .profile-phone {
+            font-size: 0.875rem;
+            color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.875rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Sections */
+        .section {
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .list-group {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.875rem;
+            overflow: hidden;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .list-icon {
+            font-size: 1.25rem;
+        }
+
+        .list-label {
+            flex: 1;
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        .list-arrow i {
+            width: 18px !important;
+            height: 18px !important;
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            margin: 2rem 1.5rem;
+            width: calc(100% - 3rem);
+            background: rgba(255, 59, 92, 0.15);
+            color: #ff3b5c;
+            border: 1px solid rgba(255, 59, 92, 0.3);
+            border-radius: 0.875rem;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 59, 92, 0.25);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='option15_light_mobile.html'">
+                    <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+                </button>
+                <div class="header-title">Profile</div>
+            </div>
+            <div class="header-right">
+                <button class="settings-btn" onclick="alert('Settings coming soon!')">
+                    <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i data-lucide="moon" style="width: 20px; height: 20px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="avatar-container">
+                <div class="avatar">RS</div>
+                <div class="edit-badge" onclick="alert('Edit photo coming soon!')">
+                    <i data-lucide="pencil"></i>
+                </div>
+            </div>
+            <div class="profile-name">Rahul Sharma</div>
+            <div class="profile-email">rahul.sharma@email.com</div>
+            <div class="profile-phone">+91 98765 43210</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Trips</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Upcoming</div>
+            </div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="section">
+            <div class="section-title">Personal Information</div>
+            <div class="list-group">
+                <div class="list-item" onclick="alert('Edit Email coming soon!')">
+                    <div class="list-icon">📧</div>
+                    <div class="list-label">Email</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+                <div class="list-item" onclick="alert('Edit Phone coming soon!')">
+                    <div class="list-icon">📱</div>
+                    <div class="list-label">Phone</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+                <div class="list-item" onclick="alert('Edit DOB coming soon!')">
+                    <div class="list-icon">📅</div>
+                    <div class="list-label">Date of Birth</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+                <div class="list-item" onclick="alert('Edit Gender coming soon!')">
+                    <div class="list-icon">⚧</div>
+                    <div class="list-label">Gender</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Travel Preferences -->
+        <div class="section">
+            <div class="section-title">Travel Preferences</div>
+            <div class="list-group">
+                <div class="list-item" onclick="alert('Edit Interests coming soon!')">
+                    <div class="list-icon">🎒</div>
+                    <div class="list-label">Interests</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+                <div class="list-item" onclick="alert('Edit Budget coming soon!')">
+                    <div class="list-icon">💰</div>
+                    <div class="list-label">Budget Range</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment & Bookings -->
+        <div class="section">
+            <div class="section-title">Payment & Bookings</div>
+            <div class="list-group">
+                <div class="list-item" onclick="alert('Payment Methods coming soon!')">
+                    <div class="list-icon">💳</div>
+                    <div class="list-label">Payment Methods</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+                <div class="list-item" onclick="alert('Booking History coming soon!')">
+                    <div class="list-icon">📜</div>
+                    <div class="list-label">Booking History</div>
+                    <div class="list-arrow">
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            window.location.href = 'option15_profile_page.html';
+        }
+
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'option15_login_light.html';
+            }
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+    <!-- TAILWIND OVERRIDE -->
+    <style>
+        button.btn-primary,
+        .btn-primary {
+            background: rgba(0, 0, 0, 0.9) !important;
+            color: #fafafa !important;
+            border: none !important;
+        }
+        button.btn-social,
+        .btn-social {
+            background: rgba(255, 255, 255, 0.6) !important;
+            color: #1a1a1a !important;
+        }
+        button.book-btn,
+        .book-btn {
+            background: rgba(0, 0, 0, 0.9) !important;
+            color: #fafafa !important;
+        }
+    </style></html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bali Beach Escape - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        html::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        body {
+            background: #0d0d0d;
+            font-family: 'Manrope', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        body::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        * {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(0, 0, 0, 0.3) 70%,
+                rgba(0, 0, 0, 0.7) 100%);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            padding: 0.875rem 1rem;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(13, 13, 13, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .header.scrolled .icon-btn {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            background: #0d0d0d;
+            border-radius: 1.25rem 1.25rem 0 0;
+            margin-top: -30px;
+            padding: 1.25rem 1rem 100px;
+            z-index: 10;
+        }
+
+        .title {
+            font-size: 1.375rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+
+        .meta {
+            display: flex;
+            gap: 0.625rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.625rem;
+            padding: 0.4375rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+
+        .chip.price {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-weight: 700;
+        }
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .dark-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.875rem;
+            padding: 1rem;
+        }
+
+        /* Accordion */
+        .accordion-item {
+            margin-bottom: 0.625rem;
+        }
+
+        .accordion-header {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-header {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .accordion-header .title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 0.875rem;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding: 0.875rem;
+        }
+
+        .accordion-content p {
+            margin: 0;
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.625rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 0.75rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.625rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Lists */
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .highlights-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8125rem;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .highlights-list li:last-child {
+            border-bottom: none;
+        }
+
+        .highlights-list li::before {
+            content: '✓';
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0d0d0d;
+            flex-shrink: 0;
+        }
+
+        /* Review */
+        .review {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 0.875rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .review-header {
+            display: flex;
+            gap: 0.625rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #0d0d0d;
+        }
+
+        .review-info .name {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .review-info .date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+
+        .review-text {
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* CTA */
+        .cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.875rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .price-info .label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .price-info .amount {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            
+            
+        }
+
+        .book-btn {
+            background: rgba(255,255,255,0.9) !important;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #0d0d0d !important;
+            cursor: pointer;
+        }
+
+        /* Participants */
+        .participants {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .participant-avatars {
+            display: flex;
+            margin-left: -8px;
+        }
+
+        .participant-avatars .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #0d0d0d;
+            margin-left: -8px;
+        }
+
+        .participant-avatars .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .participant-count {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="flex items-center justify-between">
+            <button class="icon-btn" onclick="window.location.href='option15_mobile.html'">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-center gap-2">
+                <button class="icon-btn">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                </button>
+                <button class="icon-btn">
+                    <i data-lucide="bookmark" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80" alt="Bali Beach" class="hero-img" id="heroImg" />
+        <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="title">Bali Beach Escape</div>
+
+        <div class="meta">
+            <span class="chip price">₹15,000</span>
+            <span class="chip">5 Days • 4 Nights</span>
+            <span class="chip">📍 Bali, Indonesia</span>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="section">
+            <div class="section-title">Daily Itinerary</div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 1: Arrival & Beach Welcome</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Arrive at Ngurah Rai International Airport. Transfer to hotel in Seminyak. Evening beach welcome party with sunset cocktails and meet fellow travelers.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 2: Ubud Cultural Tour</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Visit Tegalalang Rice Terraces, Sacred Monkey Forest Sanctuary, and Ubud Palace. Traditional Balinese lunch included. Evening free for shopping at Ubud Art Market.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 3: Water Sports & Beach Day</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Full day at Nusa Dua Beach. Try surfing, snorkeling, or parasailing. Beach BBQ lunch. Sunset watching at Uluwatu Temple with traditional Kecak dance performance.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 4: Island Hopping Adventure</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Boat trip to Nusa Penida. Visit Kelingking Beach, Angel's Billabong, and Broken Beach. Snorkeling at Crystal Bay. Return to Bali for farewell dinner.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="title">Day 5: Departure</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Free morning for relaxation or last-minute shopping. Check out from hotel and transfer to airport for departure with amazing memories.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="section">
+            <div class="section-title">Photo Gallery</div>
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=80" alt="Bali 1" />
+                <img src="https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?w=400&q=80" alt="Bali 2" />
+                <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=400&q=80" alt="Bali 3" />
+                <img src="https://images.unsplash.com/photo-1555400080-e0e5e577e05b?w=400&q=80" alt="Bali 4" />
+                <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&q=80" alt="Bali 5" />
+                <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&q=80" alt="Bali 6" />
+            </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="section">
+            <div class="section-title">Trip Highlights</div>
+            <div class="dark-card">
+                <ul class="highlights-list">
+                    <li>Accommodation in 4-star beach resort</li>
+                    <li>Daily breakfast & 3 special meals</li>
+                    <li>Professional tour guide</li>
+                    <li>Airport transfers included</li>
+                    <li>All entry tickets covered</li>
+                    <li>Water sports activities</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Included/Excluded -->
+        <div class="section">
+            <div class="section-title">What's Included</div>
+            <div class="dark-card">
+                <ul class="highlights-list">
+                    <li>4 nights accommodation</li>
+                    <li>Daily breakfast buffet</li>
+                    <li>All transportation</li>
+                    <li>English-speaking guide</li>
+                    <li>Entry fees to attractions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Participants -->
+        <div class="section">
+            <div class="section-title">Other Solo Travelers (8/12 joined)</div>
+            <div class="dark-card">
+                <div class="participants">
+                    <div class="participant-avatars">
+                        <img src="https://i.pravatar.cc/150?img=1" alt="User 1" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=2" alt="User 2" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=3" alt="User 3" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=4" alt="User 4" class="avatar" />
+                        <img src="https://i.pravatar.cc/150?img=5" alt="User 5" class="avatar" />
+                    </div>
+                    <span class="participant-count">+3 more travelers</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="section">
+            <div class="section-title">Agency Reviews (4.9 ⭐)</div>
+
+            <div class="review">
+                <div class="review-header">
+                    <div class="review-avatar">A</div>
+                    <div class="review-info">
+                        <div class="name">Arjun Mehta</div>
+                        <div class="date">2 weeks ago • Verified traveler</div>
+                    </div>
+                </div>
+                <div class="review-text">
+                    Amazing experience with TravelHub! The itinerary was well-planned, guide was knowledgeable, and I made great friends. Highly recommend for solo travelers!
+                </div>
+            </div>
+
+            <div class="review">
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-info">
+                        <div class="name">Priya Sharma</div>
+                        <div class="date">1 month ago • Verified traveler</div>
+                    </div>
+                </div>
+                <div class="review-text">
+                    Best decision ever! The agency took care of everything. Safe, fun, and perfectly organized. Already booked my next trip with them!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Bar -->
+    <div class="cta-bar">
+        <div class="price-info">
+            <div class="label">Total Price</div>
+            <div class="amount">₹15,000</div>
+        </div>
+        <button class="book-btn" onclick="window.location.href='option15_payment_method.html'">
+            Book Now
+        </button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Parallax effect
+        let ticking = false;
+        const heroImg = document.getElementById('heroImg');
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    heroImg.style.transform = `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0005})`;
+
+                    if (scrollY > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Accordion
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+            });
+
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+
+            lucide.createIcons();
+        }
+    </script>
+    <!-- TAILWIND OVERRIDE -->
+    <style>
+        button.btn-primary,
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #0d0d0d !important;
+            border: none !important;
+        }
+        button.btn-social,
+        .btn-social {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #fff !important;
+        }
+        button.book-btn,
+        .book-btn {
+            background: #fff !important;
+            color: #0d0d0d !important;
+        }
+    </style></body>
+</html>

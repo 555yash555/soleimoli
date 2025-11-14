@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Payment Method - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        html::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        body {
+            background: #0d0d0d !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #fff !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        body::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        * {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 1.5rem;
+            padding-bottom: 140px;
+            background: #0d0d0d;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-2px);
+        }
+
+
+        .header-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            flex: 1;
+            text-align: center;
+            margin: 0 1rem;
+        }
+
+        /* Content */
+        .title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .category-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 1.5rem 0 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .payment-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.875rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .payment-option.selected {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .payment-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .payment-option.selected .payment-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .payment-label {
+            flex: 1;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option.selected .radio {
+            border-color: #fff;
+        }
+
+        .payment-option.selected .radio::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Bottom Section */
+        .bottom-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0d0d0d;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.25rem 1.5rem;
+            max-width: 428px;
+            margin: 0 auto;
+        }
+
+        .amount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .amount-label {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .amount-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #fff !important;
+            color: #0d0d0d !important;
+            border: none;
+            border-radius: 0.875rem;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='option15_trip_detail.html'">
+                <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            </button>
+            <div class="header-title">Payment Method</div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="title">Select Payment Method</h1>
+
+        <!-- Cards & UPI -->
+        <div class="category-title">Cards & UPI</div>
+        <div class="payment-option selected" onclick="selectPayment(this)">
+            <div class="payment-icon">💳</div>
+            <div class="payment-label">Credit/Debit Card</div>
+            <div class="radio"></div>
+        </div>
+        <div class="payment-option" onclick="selectPayment(this)">
+            <div class="payment-icon">📱</div>
+            <div class="payment-label">UPI</div>
+            <div class="radio"></div>
+        </div>
+
+        <!-- Wallets -->
+        <div class="category-title">Wallets</div>
+        <div class="payment-option" onclick="selectPayment(this)">
+            <div class="payment-icon">👛</div>
+            <div class="payment-label">Paytm</div>
+            <div class="radio"></div>
+        </div>
+        <div class="payment-option" onclick="selectPayment(this)">
+            <div class="payment-icon">💰</div>
+            <div class="payment-label">PhonePe</div>
+            <div class="radio"></div>
+        </div>
+        <div class="payment-option" onclick="selectPayment(this)">
+            <div class="payment-icon">🅖</div>
+            <div class="payment-label">Google Pay</div>
+            <div class="radio"></div>
+        </div>
+
+        <!-- Banking -->
+        <div class="category-title">Banking</div>
+        <div class="payment-option" onclick="selectPayment(this)">
+            <div class="payment-icon">🏦</div>
+            <div class="payment-label">Net Banking</div>
+            <div class="radio"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+        <div class="amount-row">
+            <div class="amount-label">Amount</div>
+            <div class="amount-value">₹15,000</div>
+        </div>
+        <button class="btn-primary" onclick="proceedToPay()">Proceed to Pay</button>
+    </div>
+
+    <script>
+        function selectPayment(element) {
+            // Remove selected class from all
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // Add selected to clicked
+            element.classList.add('selected');
+        }
+
+        function proceedToPay() {
+            window.location.href = 'option15_payment_confirmation.html';
+        }
+
+        function toggleTheme() {
+            window.location.href = 'option15_payment_method_light.html';
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+    <!-- TAILWIND OVERRIDE -->
+    <style>
+        button.btn-primary,
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #0d0d0d !important;
+            border: none !important;
+        }
+        button.btn-social,
+        .btn-social {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #fff !important;
+        }
+        button.book-btn,
+        .book-btn {
+            background: #fff !important;
+            color: #0d0d0d !important;
+        }
+    </style></body>
+</html>

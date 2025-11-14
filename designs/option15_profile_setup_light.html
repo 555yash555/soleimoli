@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Profile Setup - SoleGoes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 14px;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        html::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        body {
+            background: #fafafa !important;
+            font-family: 'Manrope', sans-serif !important;
+            color: #1a1a1a !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            padding-bottom: 100px;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        body::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        * {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 428px;
+            margin: 0 auto;
+            background: #fafafa;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: #fafafa;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .theme-toggle i {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        .progress {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Content */
+        .content {
+            padding: 1.5rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Profile Photo */
+        .photo-upload {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 2px dashed rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .photo-upload:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .photo-upload i {
+            width: 32px !important;
+            height: 32px !important;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fafafa;
+        }
+
+        .camera-icon i {
+            width: 16px !important;
+            height: 16px !important;
+            color: #fafafa;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .helper-text {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1rem;
+        }
+
+        /* Input */
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .label.required::after {
+            content: ' *';
+            color: rgba(255,255,255,0.5);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.4);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.75rem;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            font-size: 0.875rem;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .input:focus {
+            outline: none;
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        textarea.input {
+            min-height: 100px;
+            resize: vertical;
+            padding-left: 1rem;
+        }
+
+        /* Gender Pills */
+        .gender-pills {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .gender-pill {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.75rem;
+            padding: 0.875rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .gender-pill.selected {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Pills Grid */
+        .pills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.625rem;
+            margin-bottom: 1rem;
+        }
+
+        .pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.625rem;
+            padding: 0.625rem 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .pill.selected {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .trait-pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.75rem;
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .trait-pill.selected {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #fafafa !important;
+            padding: 1rem;
+            border-radius: 0.875rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 396px;
+            width: calc(100% - 3rem);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='option15_otp_light.html'">
+                <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            </button>
+            <div class="progress">(3/4)</div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i data-lucide="moon"></i>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1 class="title">Complete Your Profile</h1>
+
+            <!-- Profile Photo -->
+            <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                <i data-lucide="user"></i>
+                <div class="camera-icon">
+                    <i data-lucide="camera"></i>
+                </div>
+            </div>
+            <input type="file" id="photoInput" accept="image/*" style="display: none;">
+
+            <!-- Basic Information -->
+            <div class="section-title">Basic Information</div>
+
+            <div class="input-group">
+                <label class="label required">Full Name</label>
+                <div class="input-wrapper">
+                    <i data-lucide="user" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="text" class="input" placeholder="Enter your name" id="name">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="label required">Date of Birth</label>
+                <div class="input-wrapper">
+                    <i data-lucide="calendar" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="date" class="input" id="dob">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="label required">Gender</label>
+                <div class="gender-pills">
+                    <div class="gender-pill" onclick="selectGender(this, 'male')">Male</div>
+                    <div class="gender-pill" onclick="selectGender(this, 'female')">Female</div>
+                    <div class="gender-pill" onclick="selectGender(this, 'other')">Other</div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="label required">City</label>
+                <div class="input-wrapper">
+                    <i data-lucide="map-pin" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="text" class="input" placeholder="Select your city" id="city">
+                </div>
+            </div>
+
+            <!-- About You -->
+            <div class="section-title">About You</div>
+
+            <div class="input-group">
+                <label class="label">Occupation</label>
+                <div class="input-wrapper">
+                    <i data-lucide="briefcase" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="text" class="input" placeholder="e.g., Software Engineer" id="occupation">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="label">Languages You Speak</label>
+                <div class="helper-text">(Select all that apply)</div>
+                <div class="pills-grid" id="languagesGrid">
+                    <div class="pill" onclick="togglePill(this)">English</div>
+                    <div class="pill" onclick="togglePill(this)">Hindi</div>
+                    <div class="pill" onclick="togglePill(this)">Marathi</div>
+                    <div class="pill" onclick="togglePill(this)">Tamil</div>
+                    <div class="pill" onclick="togglePill(this)">Telugu</div>
+                    <div class="pill" onclick="togglePill(this)">Bengali</div>
+                    <div class="pill" onclick="togglePill(this)">+More</div>
+                </div>
+            </div>
+
+            <!-- Personality Traits -->
+            <div class="section-title">Personality Traits</div>
+            <div class="helper-text">(Help others know you better)</div>
+            <div class="traits-grid">
+                <div class="trait-pill" onclick="togglePill(this)">🗣️ Outgoing</div>
+                <div class="trait-pill" onclick="togglePill(this)">📚 Introverted</div>
+                <div class="trait-pill" onclick="togglePill(this)">🌅 Early Bird</div>
+                <div class="trait-pill" onclick="togglePill(this)">🌙 Night Owl</div>
+                <div class="trait-pill" onclick="togglePill(this)">📸 Photographer</div>
+                <div class="trait-pill" onclick="togglePill(this)">🎮 Gamer</div>
+                <div class="trait-pill" onclick="togglePill(this)">🍷 Foodie</div>
+                <div class="trait-pill" onclick="togglePill(this)">🏃 Fitness</div>
+                <div class="trait-pill" onclick="togglePill(this)">🎭 Creative</div>
+                <div class="trait-pill" onclick="togglePill(this)">🔍 Planner</div>
+                <div class="trait-pill" onclick="togglePill(this)">🌟 Spontaneous</div>
+                <div class="trait-pill" onclick="togglePill(this)">🤝 Team Player</div>
+            </div>
+
+            <!-- Bio -->
+            <div class="input-group">
+                <label class="label">Bio (Optional)</label>
+                <textarea class="input" placeholder="Tell others about yourself, your travel experiences..." id="bio"></textarea>
+            </div>
+
+            <!-- Social Media -->
+            <div class="section-title">Social Media (Optional)</div>
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <i data-lucide="instagram" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="text" class="input" placeholder="Instagram handle" id="instagram">
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="section-title">Emergency Contact</div>
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <i data-lucide="user" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="text" class="input" placeholder="Contact name" id="emergencyName">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <i data-lucide="phone" class="input-icon" style="width: 18px; height: 18px;"></i>
+                    <input type="tel" class="input" placeholder="+91 Phone number" id="emergencyPhone">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="completeBtn" onclick="completeProfile()">Complete Profile</button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        let selectedGender = null;
+
+        function selectGender(element, gender) {
+            document.querySelectorAll('.gender-pill').forEach(p => p.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedGender = gender;
+            checkValidation();
+        }
+
+        function togglePill(element) {
+            element.classList.toggle('selected');
+        }
+
+        function checkValidation() {
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const city = document.getElementById('city').value;
+
+            const isValid = name && dob && selectedGender && city;
+            // document.getElementById("completeBtn").disabled = !isValid;
+        }
+
+        // Add event listeners for validation
+        ['name', 'dob', 'city'].forEach(id => {
+            document.getElementById(id).addEventListener('input', checkValidation);
+        });
+
+        function completeProfile() {
+            window.location.href = 'option15_mobile.html';
+        }
+
+        function toggleTheme() {
+            window.location.href = 'option15_profile_setup.html';
+        }
+
+        lucide.createIcons();
+    </script>
+    <!-- TAILWIND OVERRIDE -->
+    <style>
+        button.btn-primary,
+        .btn-primary {
+            background: rgba(0, 0, 0, 0.9) !important;
+            color: #fafafa !important;
+            border: none !important;
+        }
+        button.btn-social,
+        .btn-social {
+            background: rgba(255, 255, 255, 0.6) !important;
+            color: #1a1a1a !important;
+        }
+        button.book-btn,
+        .book-btn {
+            background: rgba(0, 0, 0, 0.9) !important;
+            color: #fafafa !important;
+        }
+    </style></html>
