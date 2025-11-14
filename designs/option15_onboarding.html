@@ -492,22 +492,17 @@
             const overlay = document.getElementById('demoPopupOverlay');
             popup.classList.remove('active');
             overlay.classList.remove('active');
-            sessionStorage.setItem('demoPopupClosed', 'true');
         }
 
-        // Show demo popup on page load
+        // Show demo popup on page load (every time)
         window.addEventListener('load', function() {
-            const popupClosed = sessionStorage.getItem('demoPopupClosed');
-
-            if (!popupClosed) {
-                setTimeout(() => {
-                    const popup = document.getElementById('demoPopup');
-                    const overlay = document.getElementById('demoPopupOverlay');
-                    popup.classList.add('active');
-                    overlay.classList.add('active');
-                    lucide.createIcons();
-                }, 800);
-            }
+            setTimeout(() => {
+                const popup = document.getElementById('demoPopup');
+                const overlay = document.getElementById('demoPopupOverlay');
+                popup.classList.add('active');
+                overlay.classList.add('active');
+                lucide.createIcons();
+            }, 800);
         });
 
         // Close popup on overlay click
