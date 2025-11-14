@@ -499,15 +499,13 @@
             overlay.classList.remove('active');
         }
 
-        // Show demo popup on page load (every time)
+        // Show demo popup on page load immediately (every time)
         window.addEventListener('load', function() {
-            setTimeout(() => {
-                const popup = document.getElementById('demoPopup');
-                const overlay = document.getElementById('demoPopupOverlay');
-                popup.classList.add('active');
-                overlay.classList.add('active');
-                lucide.createIcons();
-            }, 800);
+            const popup = document.getElementById('demoPopup');
+            const overlay = document.getElementById('demoPopupOverlay');
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            lucide.createIcons();
         });
 
         // Close popup on overlay click

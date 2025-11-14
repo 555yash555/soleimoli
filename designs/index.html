@@ -1430,7 +1430,7 @@
             sessionStorage.setItem('mobilePopupClosed', 'true');
         }
 
-        // Show popup on mobile devices
+        // Show popup on mobile devices immediately
         window.addEventListener('load', function() {
             const isMobile = window.innerWidth <= 768;
 
@@ -1440,14 +1440,12 @@
             const popupClosed = sessionStorage.getItem('mobilePopupClosed');
 
             if (isMobile && !popupClosed) {
-                setTimeout(() => {
-                    const popup = document.getElementById('mobilePopup');
-                    const overlay = document.getElementById('popupOverlay');
-                    popup.classList.add('active');
-                    overlay.classList.add('active');
-                    // Initialize lucide icons for popup
-                    lucide.createIcons();
-                }, 1000); // Show after 1 second
+                const popup = document.getElementById('mobilePopup');
+                const overlay = document.getElementById('popupOverlay');
+                popup.classList.add('active');
+                overlay.classList.add('active');
+                // Initialize lucide icons for popup
+                lucide.createIcons();
             }
         });
 
