@@ -533,18 +533,20 @@
             }
 
             .hero-content h1 {
-                font-size: clamp(2rem, 8vw, 2.5rem);
-                margin-bottom: 1rem;
+                font-size: clamp(1.875rem, 8vw, 2.25rem) !important;
+                margin-bottom: 0.875rem !important;
+                line-height: 1.15 !important;
             }
 
             .hero-subtitle {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
+                font-size: 0.9375rem !important;
+                margin-bottom: 1.75rem !important;
+                line-height: 1.5 !important;
             }
 
             .hero-cta {
                 flex-direction: column;
-                gap: 0.75rem;
+                gap: 0.875rem;
             }
 
             .btn {
@@ -555,8 +557,8 @@
             }
 
             .badge {
-                font-size: 0.8125rem !important;
-                padding: 0.625rem 1rem !important;
+                font-size: 0.75rem !important;
+                padding: 0.5rem 0.875rem !important;
             }
 
             /* Mobile app preview button */
@@ -571,12 +573,13 @@
                 border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: 0.75rem;
                 color: white;
-                font-size: 0.9375rem;
+                font-size: 0.875rem;
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.3s ease;
                 text-decoration: none;
-                margin-top: 0.75rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
             }
 
             .mobile-preview-btn:hover {
@@ -593,32 +596,34 @@
             /* Store badges mobile */
             .store-badges {
                 flex-direction: column;
-                gap: 0.875rem;
-                margin-top: 1.5rem;
+                gap: 0.75rem;
+                margin-top: 2rem;
             }
 
             .store-badge {
                 min-width: 100%;
-                padding: 1rem 1.25rem;
-                gap: 0.875rem;
+                padding: 0.875rem 1.125rem;
+                gap: 0.75rem;
             }
 
             .store-badge-icon {
-                width: 40px;
-                height: 40px;
+                width: 36px;
+                height: 36px;
             }
 
             .store-badge-icon svg {
-                width: 40px !important;
-                height: 40px !important;
+                width: 36px !important;
+                height: 36px !important;
             }
 
             .store-badge-label {
-                font-size: 0.6875rem;
+                font-size: 0.625rem;
+                letter-spacing: 0.5px;
             }
 
             .store-badge-name {
-                font-size: 1.25rem;
+                font-size: 1.125rem;
+                letter-spacing: -0.01em;
             }
 
             /* Trip cards mobile */
@@ -681,10 +686,171 @@
             .section h2 {
                 font-size: 1.75rem;
             }
+
+            /* Mobile view popup */
+            .mobile-view-popup.active {
+                display: flex !important;
+            }
+        }
+
+        /* Mobile View Popup - Always hidden on desktop */
+        .mobile-view-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            max-width: 90%;
+            width: 400px;
+            animation: popupFadeIn 0.3s ease;
+        }
+
+        .mobile-view-popup.active {
+            display: flex;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1999;
+            animation: overlayFadeIn 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            display: block;
+        }
+
+        .popup-content {
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        .popup-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 59, 92, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .popup-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .popup-text {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0d0d0d;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .popup-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -48%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @keyframes overlayFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile View Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+
+    <!-- Mobile View Popup -->
+    <div class="mobile-view-popup" id="mobilePopup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">
+                <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+            </button>
+            <div class="popup-icon">
+                <i data-lucide="monitor" style="width: 28px; height: 28px; color: #ff3b5c;"></i>
+            </div>
+            <h3 class="popup-title">Best Viewed on Desktop</h3>
+            <p class="popup-text">For the best experience with all interactive features and full platform overview, we recommend viewing this page on a laptop or desktop.</p>
+            <button class="popup-btn" onclick="closePopup()">
+                Got it
+                <i data-lucide="check" style="width: 18px; height: 18px;"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-content">
@@ -1187,6 +1353,34 @@
                 console.log('iframe content access restricted');
             }
         });
+
+        // Mobile popup functionality
+        function closePopup() {
+            const popup = document.getElementById('mobilePopup');
+            const overlay = document.getElementById('popupOverlay');
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+            // Store in session storage so popup doesn't show again
+            sessionStorage.setItem('mobilePopupClosed', 'true');
+        }
+
+        // Show popup on mobile devices (only once per session)
+        window.addEventListener('load', function() {
+            const isMobile = window.innerWidth <= 768;
+            const popupClosed = sessionStorage.getItem('mobilePopupClosed');
+
+            if (isMobile && !popupClosed) {
+                setTimeout(() => {
+                    const popup = document.getElementById('mobilePopup');
+                    const overlay = document.getElementById('popupOverlay');
+                    popup.classList.add('active');
+                    overlay.classList.add('active');
+                }, 1000); // Show after 1 second
+            }
+        });
+
+        // Close popup when clicking overlay
+        document.getElementById('popupOverlay').addEventListener('click', closePopup);
     </script>
 </body>
 </html>
